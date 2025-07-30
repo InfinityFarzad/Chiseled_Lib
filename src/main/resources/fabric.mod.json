@@ -10,7 +10,7 @@
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/project/chiseled-lib",
-		"sources": ""
+		"sources": "https://github.com/InfinityFarzad/Chiseled_Lib"
 	},
 	"license": "ARR",
 	"icon": "assets/chiseled_lib/icon.png",
