@@ -3,6 +3,7 @@ package net.akws.chiseled_lib.client.util;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.block.entity.BeaconBlockEntityRenderer;
 import net.minecraft.util.Identifier;
 
 public class RenderUtil {
