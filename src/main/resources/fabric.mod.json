@@ -17,10 +17,13 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.akws.chiseled_lib.ChiseledLib"
+			"net.akws.chiseled_lib.common.ChiseledLib"
 		],
 		"fabric-datagen": [
-			"net.akws.chiseled_lib.ChiseledLibDataGenerator"
+			"net.akws.chiseled_lib.common.datagen.ChiseledLibDataGenerator"
+		],
+		"client": [
+			"net.akws.chiseled_lib.client.ChiseledLibClient"
 		]
 	},
 	"mixins": [
