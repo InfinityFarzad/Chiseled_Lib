@@ -3,13 +3,20 @@ package net.akws.chiseled_lib.common.util.cameraEffects;
 import net.akws.chiseled_lib.common.ChiseledLib;
 import net.akws.chiseled_lib.common.mixin_interface.ScreenshakeDataInterface;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.logging.Logger;
+
 public class ScreenshakeManager {
+
+    public static final TrackedData<NbtCompound> SCREANSHAKE_COMPOUND = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.NBT_COMPOUND);
 
     public static void createScreenShake(ScreenshakeDataHolder data, PlayerEntity player) {
         if (player.getWorld() instanceof ServerWorld world) {
@@ -35,7 +42,7 @@ public class ScreenshakeManager {
 
             return new ScreenshakeDataHolder(intensity,duration,pos,radius);
         } else {
-            ChiseledLib.LOGGER.error("SCREENSHAKE INSTANCE DOES NOT EXIST");
+            ChiseledLib.LOGGER.error("ba");
             return null;
         }
     }
