@@ -1,5 +1,7 @@
 package net.akws.chiseled_lib.common.util.cameraEffects;
 
+import net.akws.chiseled_lib.common.ChiseledLib;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Vec3d;
 
 public class ScreenshakeDataHolder {
