@@ -3,6 +3,8 @@
 	"package": "net.akws.chiseled_lib.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"LivingEntityMixin",
+		"PlayerEntityMixin",
 		"PlayerEntityRiptideMixin",
 		"RiptideStackAccesor"
 	],
@@ -13,7 +15,7 @@
 		"requireAnnotations": true
 	},
 	"client": [
-		"DrawContextMixin",
-		"PlayerEntityRendererMixin"
+		"CameraMixin",
+		"DrawContextMixin"
 	]
 }
