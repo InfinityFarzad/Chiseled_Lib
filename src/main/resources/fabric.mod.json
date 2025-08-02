@@ -3,7 +3,7 @@
 	"id": "chiseled_lib",
 	"version": "${version}",
 	"name": "Chiseled Lib",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "chiseled lib is a library i made for Architektum Workshop to help with mod development and also to prevent us from repeatedly recoding the same thing for each project.",
 	"authors": [
 		"InfinityFarzad",
 		"MongoCat"
