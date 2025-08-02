@@ -14,5 +14,6 @@ public class ChiseledLibComponents {
             ComponentType.<ItemHighlightComponent>builder().codec(ItemHighlightComponent.CODEC).build()
     );
 
-    public static void init() {}
+    public static void init() {
+    }
 }

@@ -13,9 +13,9 @@ public class EnchantmentUtil {
                 contains(enchantment.getValue().toString());
     }
 
-    public static int getLevel(ItemStack stack, RegistryKey<Enchantment> enchantmentRegistryKey){
-        for (RegistryEntry<Enchantment> enchantments : stack.getEnchantments().getEnchantments()){
-            if (enchantments.toString().contains(enchantmentRegistryKey.getValue().toString())){
+    public static int getLevel(ItemStack stack, RegistryKey<Enchantment> enchantmentRegistryKey) {
+        for (RegistryEntry<Enchantment> enchantments : stack.getEnchantments().getEnchantments()) {
+            if (enchantments.toString().contains(enchantmentRegistryKey.getValue().toString())) {
                 return stack.getEnchantments().getLevel(enchantments);
             }
         }
@@ -23,9 +23,9 @@ public class EnchantmentUtil {
     }
 
     public static ItemStack getRiptideStack(PlayerEntity player) {
-        ItemStack stack = ((RiptideMixinInterface)player).chiseled_lib$getRiptideStack();
+        ItemStack stack = ((RiptideMixinInterface) player).chiseled_lib$getRiptideStack();
         if (stack != null) {
-            return ((RiptideMixinInterface)player).chiseled_lib$getRiptideStack();
+            return ((RiptideMixinInterface) player).chiseled_lib$getRiptideStack();
         } else {
             return ItemStack.EMPTY;
         }

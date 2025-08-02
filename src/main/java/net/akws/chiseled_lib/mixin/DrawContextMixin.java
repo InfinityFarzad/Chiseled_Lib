@@ -1,6 +1,5 @@
 package net.akws.chiseled_lib.mixin;
 
-import net.akws.chiseled_lib.common.ChiseledLib;
 import net.akws.chiseled_lib.common.component.ChiseledLibComponents;
 import net.akws.chiseled_lib.common.component.ItemHighlightComponent;
 import net.akws.chiseled_lib.common.mixin_interface.HighlightMixinInterface;
@@ -19,7 +18,7 @@ public class DrawContextMixin implements HighlightMixinInterface {
 
     @Inject(method = "drawStackOverlay(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;push()V", shift = At.Shift.AFTER))
     private void chiseledLib$drawStackGlint(TextRenderer textRenderer, ItemStack stack, int x, int y, String stackCountText, CallbackInfo ci) {
-        chiseledLib$drawItemGlint(stack,x,y);
+        chiseledLib$drawItemGlint(stack, x, y);
     }
 
     @Override
@@ -28,10 +27,10 @@ public class DrawContextMixin implements HighlightMixinInterface {
             ItemHighlightComponent glint = item.get(ChiseledLibComponents.ITEM_HIGHLIGHT);
             if (glint.show()) {
                 DrawContext drawContext = (DrawContext) (Object) this;
-                drawContext.fillGradient(RenderLayer.getGuiOverlay(),x,y,x +16, y + 16,ColorHelper.withAlpha(2,glint.color()),  ColorHelper.withAlpha(45,glint.color()),200);
-                drawContext.fillGradient(RenderLayer.getGuiOverlay(),x + 16,y + 16 ,x + 15,y,ColorHelper.withAlpha(85,glint.color()),ColorHelper.withAlpha(20,glint.color()),200);
-                drawContext.fillGradient(RenderLayer.getGuiOverlay(),x + 1,y + 16 ,x,y,ColorHelper.withAlpha(85,glint.color()),ColorHelper.withAlpha(20,glint.color()),200);
-                drawContext.fill(RenderLayer.getGuiOverlay(),x + 1,y + 16,x + 15,y + 15,200,ColorHelper.withAlpha(85,glint.color()));
+                drawContext.fillGradient(RenderLayer.getGuiOverlay(), x, y, x + 16, y + 16, ColorHelper.withAlpha(2, glint.color()), ColorHelper.withAlpha(45, glint.color()), 200);
+                drawContext.fillGradient(RenderLayer.getGuiOverlay(), x + 16, y + 16, x + 15, y, ColorHelper.withAlpha(85, glint.color()), ColorHelper.withAlpha(20, glint.color()), 200);
+                drawContext.fillGradient(RenderLayer.getGuiOverlay(), x + 1, y + 16, x, y, ColorHelper.withAlpha(85, glint.color()), ColorHelper.withAlpha(20, glint.color()), 200);
+                drawContext.fill(RenderLayer.getGuiOverlay(), x + 1, y + 16, x + 15, y + 15, 200, ColorHelper.withAlpha(85, glint.color()));
             }
         }
     }

@@ -4,5 +4,6 @@ import net.minecraft.item.ItemStack;
 
 public interface RiptideMixinInterface {
     ItemStack chiseled_lib$getRiptideStack();
+
     void chiseled_lib$setRiptideStack(ItemStack stack);
 }

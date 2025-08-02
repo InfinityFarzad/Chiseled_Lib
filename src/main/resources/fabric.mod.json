@@ -24,6 +24,9 @@
 		],
 		"client": [
 			"net.akws.chiseled_lib.client.ChiseledLibClient"
+		],
+		"cardinal-components":[
+			"net.akws.chiseled_lib.common.component.ChiseledCCARegistries"
 		]
 	},
 	"mixins": [
@@ -37,5 +40,10 @@
 	},
 	"suggests": {
 		"another-mod": "*"
+	},
+	"custom": {
+		"cardinal-components": [
+			"chiseled_lib:screenshake_component"
+		]
 	}
 }
