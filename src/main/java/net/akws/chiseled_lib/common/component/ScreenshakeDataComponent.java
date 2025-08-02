@@ -32,6 +32,7 @@ public class ScreenshakeDataComponent implements AutoSyncedComponent {
         this.radius = radius;
         this.intensity = intensity;
         this.screenshakeTick = screenshakeTick;
+        ChiseledCCARegistries.SCREENSHAKE_COMPONENT.sync(this.player);
     }
 
     public ScreenshakeDataHolder getScreenshakeDataHolder() {
