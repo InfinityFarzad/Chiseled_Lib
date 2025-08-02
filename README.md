@@ -32,6 +32,7 @@ and also add the chiseled_lib_version to your `gradle.properties` :
 
 ```Groovy
   chiseled_lib_version=1.0.0
+  cca_version = 6.3.1
 
 ```
 you can find the latest version of the mod on our [Modrinth Page](https://modrinth.com/mod/chiseled-lib)
