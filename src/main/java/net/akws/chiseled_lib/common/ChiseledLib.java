@@ -21,12 +21,6 @@ public class ChiseledLib implements ModInitializer {
     @Override
     public void onInitialize() {
         ChiseledLibComponents.init();
-        UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
-            ScreenshakeDataHolder data = new ScreenshakeDataHolder(5, 20 * 5, playerEntity.getPos(), 2.5f);
-            ScreenshakeManager.createScreenShake(data, playerEntity);
-
-            return ActionResult.PASS;
-        });
 
     }
 }
