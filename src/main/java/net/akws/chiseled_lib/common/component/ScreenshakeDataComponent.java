@@ -4,6 +4,7 @@ import net.akws.chiseled_lib.common.util.cameraEffects.ScreenshakeDataHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
@@ -79,6 +80,11 @@ public class ScreenshakeDataComponent implements AutoSyncedComponent {
             this.z = 0;
         }
 
+    }
+
+    @Override
+    public boolean shouldSyncWith(ServerPlayerEntity player) {
+        return player == this.player;
     }
 
     @Override

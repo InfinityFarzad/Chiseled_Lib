@@ -12,17 +12,9 @@ public class ScreenshakeManager {
 
     public static void createScreenShake(ScreenshakeDataHolder data, PlayerEntity player) {
         if (player.getWorld() instanceof ServerWorld world) {
-            for (PlayerEntity Splayer : PlayerLookup.around(world,data.pos,data.radius)) {
+            for (PlayerEntity Splayer : PlayerLookup.world(world)) {
                 ScreenshakeDataComponent.getData(Splayer).setScreenshakeDataHolder(data.pos, data.radius, data.intensity, data.shakeTicks);
             }
-        }
-    }
-
-    private static ServerWorld getServerworld(World world) {
-        if (world instanceof ServerWorld serverWorld) {
-            return serverWorld;
-        } else {
-            return null;
         }
     }
 
