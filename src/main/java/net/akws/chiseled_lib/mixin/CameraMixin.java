@@ -1,9 +1,7 @@
 package net.akws.chiseled_lib.mixin;
 
-import net.akws.chiseled_lib.common.ChiseledLib;
-import net.akws.chiseled_lib.common.component.ScreenshakeDataComponent;
-import net.akws.chiseled_lib.common.util.cameraEffects.ScreenshakeDataHolder;
-import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
+import net.akws.chiseled_lib.common.component.screen_shake.ScreenshakeDataComponent;
+import net.akws.chiseled_lib.client.camera_effects.ScreenshakeDataHolder;
 import net.minecraft.client.render.Camera;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

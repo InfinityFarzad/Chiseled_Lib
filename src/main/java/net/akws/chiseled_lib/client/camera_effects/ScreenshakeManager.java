@@ -1,12 +1,9 @@
-package net.akws.chiseled_lib.common.util.cameraEffects;
+package net.akws.chiseled_lib.client.camera_effects;
 
-import net.akws.chiseled_lib.common.component.ChiseledCCARegistries;
-import net.akws.chiseled_lib.common.component.ScreenshakeDataComponent;
+import net.akws.chiseled_lib.common.component.screen_shake.ScreenshakeDataComponent;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.Box;
-import net.minecraft.world.World;
 
 public class ScreenshakeManager {
 

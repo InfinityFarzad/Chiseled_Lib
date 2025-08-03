@@ -1,9 +1,9 @@
 package net.akws.chiseled_lib.common;
 
+import net.akws.chiseled_lib.client.camera_effects.ScreenshakeDataHolder;
+import net.akws.chiseled_lib.client.camera_effects.ScreenshakeManager;
 import net.akws.chiseled_lib.common.component.ChiseledCCARegistries;
 import net.akws.chiseled_lib.common.component.ChiseledLibComponents;
-import net.akws.chiseled_lib.common.util.cameraEffects.ScreenshakeDataHolder;
-import net.akws.chiseled_lib.common.util.cameraEffects.ScreenshakeManager;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -22,19 +22,11 @@ public class ChiseledLib implements ModInitializer {
         return Identifier.of(MOD_ID, key);
     }
 
-    @Override
+	@Override
     public void onInitialize() {
         ChiseledLibComponents.init();
         ServerPlayConnectionEvents.DISCONNECT.register((serverPlayNetworkHandler, minecraftServer) -> {
             ChiseledCCARegistries.SCREENSHAKE_COMPONENT.get(serverPlayNetworkHandler.player).setScreenshakeDataHolder(Vec3d.ZERO,0,0,0);
         });
-
-        UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
-            if (playerEntity.getStackInHand(hand).isOf(Items.STICK)) {
-                ScreenshakeManager.createScreenShake(new ScreenshakeDataHolder(20f,20 * 10,playerEntity.getPos(),3f),playerEntity);
-            }
-            return ActionResult.PASS;
-        });
-
     }
 }

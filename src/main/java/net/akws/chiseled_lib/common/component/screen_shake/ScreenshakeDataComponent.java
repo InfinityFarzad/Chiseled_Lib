@@ -1,6 +1,7 @@
-package net.akws.chiseled_lib.common.component;
+package net.akws.chiseled_lib.common.component.screen_shake;
 
-import net.akws.chiseled_lib.common.util.cameraEffects.ScreenshakeDataHolder;
+import net.akws.chiseled_lib.client.camera_effects.ScreenshakeDataHolder;
+import net.akws.chiseled_lib.common.component.ChiseledCCARegistries;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;

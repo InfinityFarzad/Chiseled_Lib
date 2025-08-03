@@ -1,4 +1,4 @@
-package net.akws.chiseled_lib.common.util.cameraEffects;
+package net.akws.chiseled_lib.client.camera_effects;
 
 import net.minecraft.util.math.Vec3d;
 

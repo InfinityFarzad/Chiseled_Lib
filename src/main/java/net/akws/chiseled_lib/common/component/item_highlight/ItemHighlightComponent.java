@@ -1,4 +1,4 @@
-package net.akws.chiseled_lib.common.component;
+package net.akws.chiseled_lib.common.component.item_highlight;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

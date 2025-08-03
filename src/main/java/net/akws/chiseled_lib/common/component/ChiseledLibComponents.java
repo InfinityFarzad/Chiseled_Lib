@@ -1,6 +1,7 @@
 package net.akws.chiseled_lib.common.component;
 
 import net.akws.chiseled_lib.common.ChiseledLib;
+import net.akws.chiseled_lib.common.component.item_highlight.ItemHighlightComponent;
 import net.minecraft.component.ComponentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;

@@ -1,6 +1,7 @@
 package net.akws.chiseled_lib.common.component;
 
 import net.akws.chiseled_lib.common.ChiseledLib;
+import net.akws.chiseled_lib.common.component.screen_shake.ScreenshakeDataComponent;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 import org.ladysnake.cca.api.v3.entity.EntityComponentFactoryRegistry;
