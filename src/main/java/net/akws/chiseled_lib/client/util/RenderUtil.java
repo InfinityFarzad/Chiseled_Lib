@@ -26,20 +26,16 @@ public class RenderUtil {
 
     // DO NOT USE THESE, THEY ARE INCOMPLETE AND BUGGY
 
-    /*
-    disabled methods
-    public static void renderCube(MatrixStack stack, VertexConsumer vertices, Vec3d pos, int color, float scale) {
+    public static void renderCube(MatrixStack stack, VertexConsumer vertices, Vec3d pos, int color, float scale, double totalTickDelta) {
         float radius = scale / 2;
 
-        renderQuadruple(stack.peek(),vertices,new Vec3d(pos.x + radius,pos.y + radius, pos.z + radius),new Vec3d(pos.x - radius,pos.y + radius, pos.z + radius),new Vec3d(pos.x - radius,pos.y - radius, pos.z + radius),new Vec3d(pos.x + radius,pos.y - radius, pos.z + radius),color);
         stack.push();
-        renderQuadruple(stack.peek(),vertices,new Vec3d(pos.x + radius,pos.y + radius, pos.z + radius),new Vec3d(pos.x - radius,pos.y + radius, pos.z + radius),new Vec3d(pos.x - radius,pos.y - radius, pos.z + radius),new Vec3d(pos.x + radius,pos.y - radius, pos.z + radius),color);
-        stack.translate(0,0,radius);
+        renderQuad(stack.peek(),vertices,new Vec3d(pos.x + radius,pos.y + radius, pos.z + radius),new Vec3d(pos.x - radius,pos.y + radius, pos.z + radius),new Vec3d(pos.x - radius,pos.y - radius, pos.z + radius),new Vec3d(pos.x + radius,pos.y - radius, pos.z + radius),color);
         stack.pop();
 
     }
 
-    public static void renderQuadruple(MatrixStack.Entry stack, VertexConsumer vertices, Vec3d firstPoint, Vec3d secondPoint, Vec3d thirdPoint, Vec3d forthPoint, int color) {
+    public static void renderQuad(MatrixStack.Entry stack, VertexConsumer vertices, Vec3d firstPoint, Vec3d secondPoint, Vec3d thirdPoint, Vec3d forthPoint, int color) {
         renderVertex(stack,vertices,firstPoint,color);
         renderVertex(stack,vertices,secondPoint,color);
         renderVertex(stack,vertices,thirdPoint,color);
@@ -54,6 +50,6 @@ public class RenderUtil {
 
     public static void renderVertex(MatrixStack.Entry stack,VertexConsumer vertices,Vec3d pos, int color) {
         vertices.vertex(stack,(float)pos.x,(float)pos.y,(float)pos.z).color(color).normal(0,1,0).overlay(OverlayTexture.DEFAULT_UV).light(10).texture(0,0);
-    }*/
+    }
 
 }
