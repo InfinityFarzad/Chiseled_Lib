@@ -1,6 +1,6 @@
 package net.akws.chiseled_lib.mixin;
 
-import net.akws.chiseled_lib.client.camera_effects.ScreenshakeDataHolder;
+import net.akws.chiseled_lib.client.camera_effects.Screenshake;
 import net.akws.chiseled_lib.common.component.screen_shake.ScreenshakeDataComponent;
 import net.minecraft.client.render.Camera;
 import net.minecraft.entity.Entity;
@@ -36,7 +36,7 @@ public abstract class CameraMixin {
     private void chiseled$updateScreenshakeTick(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickProgress, CallbackInfo ci) {
         Camera cam = (Camera) (Object) this;
         if (focusedEntity instanceof PlayerEntity player) {
-            ScreenshakeDataHolder data = ScreenshakeDataComponent.getData(player).getScreenshakeDataHolder();
+            Screenshake data = ScreenshakeDataComponent.getData(player).getScreenshakeDataHolder();
             if (data != null && data.shakeTicks != 0) {
                 if (player.getPos().distanceTo(data.pos) <= data.radius && data.shakeTicks > 0) {
                     Random rand = new Random();

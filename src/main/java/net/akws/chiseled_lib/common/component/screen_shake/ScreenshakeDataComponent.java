@@ -1,6 +1,6 @@
 package net.akws.chiseled_lib.common.component.screen_shake;
 
-import net.akws.chiseled_lib.client.camera_effects.ScreenshakeDataHolder;
+import net.akws.chiseled_lib.client.camera_effects.Screenshake;
 import net.akws.chiseled_lib.common.component.ChiseledCCARegistries;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -37,13 +37,14 @@ public class ScreenshakeDataComponent implements AutoSyncedComponent {
         ChiseledCCARegistries.SCREENSHAKE_COMPONENT.sync(this.player);
     }
 
-    public ScreenshakeDataHolder getScreenshakeDataHolder() {
-        return new ScreenshakeDataHolder(this.intensity, this.screenshakeTick, new Vec3d(x,y,z), this.radius);
+    public Screenshake getScreenshakeDataHolder() {
+        return new Screenshake(this.intensity, this.screenshakeTick, new Vec3d(x, y, z), this.radius);
     }
 
 
     @Override
     public void readFromNbt(NbtCompound nbtCompound, RegistryWrapper.WrapperLookup wrapperLookup) {
+
         if (nbtCompound.contains("screenshake_intensity")) {
             this.intensity = nbtCompound.getFloat("screenshake_intensity", 0);
         } else {
@@ -74,7 +75,6 @@ public class ScreenshakeDataComponent implements AutoSyncedComponent {
             this.y = 0;
         }
 
-
         if (nbtCompound.contains("screenshake_z")) {
             this.z = nbtCompound.getFloat("screenshake_z", 0);
         } else {
@@ -90,7 +90,6 @@ public class ScreenshakeDataComponent implements AutoSyncedComponent {
 
     @Override
     public void writeToNbt(NbtCompound nbtCompound, RegistryWrapper.WrapperLookup wrapperLookup) {
-
         nbtCompound.putFloat("screenshake_intensity", intensity);
         nbtCompound.putFloat("screenshake_tick", screenshakeTick);
         nbtCompound.putFloat("screenshake_radius", radius);
@@ -98,7 +97,6 @@ public class ScreenshakeDataComponent implements AutoSyncedComponent {
         nbtCompound.putDouble("screenshake_x", x);
         nbtCompound.putDouble("screenshake_y", y);
         nbtCompound.putDouble("screenshake_z", z);
-
 
     }
 }

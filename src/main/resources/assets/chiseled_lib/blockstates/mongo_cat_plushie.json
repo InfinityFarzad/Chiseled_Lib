@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "chiseled_lib:block/mongo_cat_plushie",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "chiseled_lib:block/mongo_cat_plushie"
+    },
+    "facing=south": {
+      "model": "chiseled_lib:block/mongo_cat_plushie",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "chiseled_lib:block/mongo_cat_plushie",
+      "y": 270
+    }
+  }
+}
