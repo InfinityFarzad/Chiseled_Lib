@@ -10,6 +10,4 @@ public record ItemHighlightComponent(int color, boolean show) {
                 Codec.BOOL.optionalFieldOf("show", false).forGetter(ItemHighlightComponent::show)
         ).apply(builder, ItemHighlightComponent::new);
     });
-
-
 }

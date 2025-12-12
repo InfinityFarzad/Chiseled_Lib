@@ -1,10 +1,13 @@
 package net.akws.chiseled_lib.client.camera_effects;
 
+import net.akws.chiseled_lib.common.ChiseledLib;
 import net.akws.chiseled_lib.common.component.screen_shake.ScreenshakeDataComponent;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
+
+import java.util.List;
 
 public class Screenshake {
 
@@ -21,10 +24,14 @@ public class Screenshake {
     }
 
     public static void createScreenShake(Screenshake data, PlayerEntity player) {
-        if (player.getWorld() instanceof ServerWorld world) {
-            for (PlayerEntity Splayer : PlayerLookup.world(world)) {
-                ScreenshakeDataComponent.getData(Splayer).setScreenshakeDataHolder(data.pos, data.radius, data.intensity, data.shakeTicks);
-            }
+        if (ChiseledLib.screenshakes != null) {
+            ChiseledLib.screenshakes.add(data);
+        }
+    }
+
+    public static void tick() {
+        if (ChiseledLib.screenshakes != null) {
+            ChiseledLib.screenshakes.removeIf(screenshake -> screenshake.shakeTicks <= 0);
         }
     }
 

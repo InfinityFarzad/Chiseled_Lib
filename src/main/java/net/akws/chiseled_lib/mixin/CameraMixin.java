@@ -5,6 +5,7 @@ import net.akws.chiseled_lib.common.component.screen_shake.ScreenshakeDataCompon
 import net.minecraft.client.render.Camera;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,15 +38,10 @@ public abstract class CameraMixin {
         Camera cam = (Camera) (Object) this;
         if (focusedEntity instanceof PlayerEntity player) {
             Screenshake data = ScreenshakeDataComponent.getData(player).getScreenshakeDataHolder();
-            if (data != null && data.shakeTicks != 0) {
+            if (data != null) {
                 if (player.getPos().distanceTo(data.pos) <= data.radius && data.shakeTicks > 0) {
                     Random rand = new Random();
-                    setRotation(getYaw() + rand.nextFloat(0.5f * data.intensity), getPitch() + rand.nextFloat(0.5f * data.intensity));
-                    ScreenshakeDataComponent.getData(player).setScreenshakeDataHolder(data.pos, data.radius, data.intensity, data.shakeTicks - this.lastTickProgress);
-                } else {
-                    if (data.shakeTicks > 0) {
-                        ScreenshakeDataComponent.getData(player).setScreenshakeDataHolder(data.pos, data.radius, data.intensity, data.shakeTicks - this.lastTickProgress);
-                    }
+                    setRotation(getYaw() + rand.nextFloat(data.intensity * 0.5f),getPitch() + rand.nextFloat(data.intensity * 0.5f));
                 }
             }
         }

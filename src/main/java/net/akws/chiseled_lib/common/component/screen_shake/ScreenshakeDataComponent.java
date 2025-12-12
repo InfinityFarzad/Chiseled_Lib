@@ -1,6 +1,7 @@
 package net.akws.chiseled_lib.common.component.screen_shake;
 
 import net.akws.chiseled_lib.client.camera_effects.Screenshake;
+import net.akws.chiseled_lib.common.ChiseledLib;
 import net.akws.chiseled_lib.common.component.ChiseledCCARegistries;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -8,8 +9,9 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
+import org.ladysnake.cca.api.v3.component.tick.CommonTickingComponent;
 
-public class ScreenshakeDataComponent implements AutoSyncedComponent {
+public class ScreenshakeDataComponent implements AutoSyncedComponent, CommonTickingComponent {
 
     public PlayerEntity player;
     private float intensity;
@@ -98,5 +100,27 @@ public class ScreenshakeDataComponent implements AutoSyncedComponent {
         nbtCompound.putDouble("screenshake_y", y);
         nbtCompound.putDouble("screenshake_z", z);
 
+    }
+
+    @Override
+    public void tick() {
+        ScreenshakeDataComponent component = ChiseledCCARegistries.SCREENSHAKE_COMPONENT.get(this.player);
+        if (ChiseledLib.screenshakes != null) {
+            if (!ChiseledLib.screenshakes.isEmpty() && !(this.player.getPos().distanceTo(new Vec3d(component.x,component.y,component.z)) > component.radius)) {
+                for (Screenshake screenshake : ChiseledLib.screenshakes) {
+                    if (this.player.getPos().distanceTo(screenshake.pos) <= screenshake.radius) {
+                        if (screenshake.intensity > component.intensity) {
+                            component.setScreenshakeDataHolder(screenshake.pos, screenshake.radius, screenshake.intensity, screenshake.shakeTicks);
+                            ChiseledCCARegistries.SCREENSHAKE_COMPONENT.sync(this.player);
+                        }
+                    }
+                    screenshake.shakeTicks--;
+                }
+            } else {
+                component.setScreenshakeDataHolder(Vec3d.ZERO,500000,0,0);
+                ChiseledCCARegistries.SCREENSHAKE_COMPONENT.sync(this.player);
+            }
+        }
+        ChiseledCCARegistries.SCREENSHAKE_COMPONENT.sync(this.player);
     }
 }

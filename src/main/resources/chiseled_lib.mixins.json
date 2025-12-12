@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LivingEntityMixin",
+    "PlayerEntityMixin",
     "PlayerEntityRiptideMixin",
     "RiptideStackAccesor"
   ],
@@ -15,6 +16,6 @@
   },
   "client": [
     "CameraMixin",
-    "DrawContextMixin",
+    "DrawContextMixin"
   ]
 }

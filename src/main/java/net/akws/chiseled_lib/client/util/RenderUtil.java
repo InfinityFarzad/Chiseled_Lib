@@ -23,7 +23,7 @@ public class RenderUtil {
 
     // DO NOT USE THESE, THEY ARE INCOMPLETE AND BUGGY
 
-    public static void renderCube(MatrixStack stack, VertexConsumer vertices, Vec3d pos, int color, float scale) {
+    /*public static void renderCube(MatrixStack stack, VertexConsumer vertices, Vec3d pos, int color, float scale) {
         float radius = scale / 2;
         stack.push();
         renderQuad(stack.peek(), vertices, new Vec3d(pos.x + radius, pos.y + radius, pos.z + radius), new Vec3d(pos.x - radius, pos.y + radius, pos.z + radius), new Vec3d(pos.x - radius, pos.y - radius, pos.z + radius), new Vec3d(pos.x + radius, pos.y - radius, pos.z + radius), color);
@@ -46,6 +46,6 @@ public class RenderUtil {
 
     public static void renderVertex(MatrixStack.Entry stack, VertexConsumer vertices, Vec3d pos, int color, int u, int v) {
         vertices.vertex(stack, (float) pos.x, (float) pos.y, (float) pos.z).overlay(OverlayTexture.DEFAULT_UV).color(color).normal(stack, (float) pos.x, (float) pos.y, (float) pos.z).texture(40, 40).light(503);
-    }
+    }*/
 
 }
