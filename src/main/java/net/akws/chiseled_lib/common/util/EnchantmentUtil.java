@@ -1,6 +1,6 @@
 package net.akws.chiseled_lib.common.util;
 
-import net.akws.chiseled_lib.common.mixin_interface.RiptideMixinInterface;
+import net.akws.chiseled_lib.common.interfaces.mixin_interface.RiptideMixinInterface;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

@@ -39,6 +39,16 @@ public class ChiseledLib implements ModInitializer {
             Screenshake.tick();
         });
 
+        UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
+            if (playerEntity.getStackInHand(hand).isOf(Items.FLINT)) {
+                Screenshake.createScreenShake(new Screenshake(2.5f,20 * 5,playerEntity.getPos(),20),playerEntity);
+            }
+            if (playerEntity.getStackInHand(hand).isOf(Items.EMERALD)) {
+                Screenshake.createScreenShake(new Screenshake(4.5f,20 * 5,playerEntity.getPos(),20),playerEntity);
+            }
+            return ActionResult.PASS;
+        });
+
         //ChiseledLibBlocks.init();
         RegisteryUtil.init();
     }

@@ -2,7 +2,7 @@ package net.akws.chiseled_lib.mixin;
 
 import net.akws.chiseled_lib.common.component.ChiseledLibComponents;
 import net.akws.chiseled_lib.common.component.item_highlight.ItemHighlightComponent;
-import net.akws.chiseled_lib.common.mixin_interface.HighlightMixinInterface;
+import net.akws.chiseled_lib.common.interfaces.mixin_interface.HighlightMixinInterface;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;

@@ -1,6 +1,6 @@
 package net.akws.chiseled_lib.mixin;
 
-import net.akws.chiseled_lib.common.mixin_interface.RiptideMixinInterface;
+import net.akws.chiseled_lib.common.interfaces.mixin_interface.RiptideMixinInterface;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

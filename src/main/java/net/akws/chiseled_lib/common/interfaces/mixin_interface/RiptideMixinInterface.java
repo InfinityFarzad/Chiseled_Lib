@@ -1,4 +1,4 @@
-package net.akws.chiseled_lib.common.mixin_interface;
+package net.akws.chiseled_lib.common.interfaces.mixin_interface;
 
 import net.minecraft.item.ItemStack;
 

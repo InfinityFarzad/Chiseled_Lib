@@ -20,8 +20,6 @@ public interface ItemSweepingInterface {
         return false;
     }
 
-    default void customParticleSpawn(ItemStack stack, PlayerEntity player) {
-
-    }
+    default void customParticleSpawn(ItemStack stack, PlayerEntity player) {}
 
 }
