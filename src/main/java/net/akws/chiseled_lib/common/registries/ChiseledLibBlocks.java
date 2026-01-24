@@ -20,10 +20,12 @@ import java.util.function.Function;
 
 public class ChiseledLibBlocks {
 
-    public static final Block INFINITYFARZAD_PLUSHIE = registerPlushie("infinityfarzad_plushie", PlushieBlock::new, AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOL),true);
-    public static final Block MONGO_CAT_PLUSHIE = registerPlushie("mongo_cat_plushie",PlushieBlock::new, AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOL),true);
-    public static final Block JUKO_LUL_PLUSHIE = registerPlushie("juko_lul_plushie",PlushieBlock::new, AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOL),true);
-
+    public static final Block INFINITYFARZAD_PLUSHIE = registerPlushie("infinityfarzad_plushie", PlushieBlock::new,
+            AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOL),true);
+    public static final Block MONGO_CAT_PLUSHIE = registerPlushie("mongo_cat_plushie", PlushieBlock::new,
+            AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOL),true);
+    public static final Block JUKO_LUL_PLUSHIE = registerPlushie("juko_lul_plushie", PlushieBlock::new,
+            AbstractBlock.Settings.create().sounds(BlockSoundGroup.WOOL),true);
 
 
     private static Block registerPlushie(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, boolean shouldRegisterItem) {

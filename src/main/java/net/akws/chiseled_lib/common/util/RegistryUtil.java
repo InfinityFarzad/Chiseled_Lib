@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.function.Function;
 
-public class RegisteryUtil {
+public class RegistryUtil {
 
     public static <T extends ParticleEffect> ParticleType<T> registerComplexParticle(
             Identifier identifier,
@@ -46,7 +46,5 @@ public class RegisteryUtil {
         RenderPipelines.register(renderPipeline);
         return renderPipeline;
     }
-
-    public static void init() {}
 
 }

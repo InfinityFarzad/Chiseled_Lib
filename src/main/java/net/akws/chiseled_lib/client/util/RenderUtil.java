@@ -1,23 +1,18 @@
 package net.akws.chiseled_lib.client.util;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.RotationAxis;
-import net.minecraft.util.math.Vec3d;
 
 public class RenderUtil {
 
     public static void renderScreenOverlay(DrawContext context, MinecraftClient client, Identifier sprite) {
-        context.drawTexture(RenderLayer::getGuiTexturedOverlay, sprite, 0, 0, client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight(), client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight(), client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight());
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, sprite, 0, 0, client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight(), client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight(), client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight());
     }
 
     public static void renderScreenElement(DrawContext context, Identifier sprite, MinecraftClient client, int height, int width, int x, int y) {
-        context.drawTexture(RenderLayer::getGuiTextured, sprite, client.getWindow().getScaledWidth() / 2 + x, client.getWindow().getScaledHeight() - y, 0, 0, width, height, width, height);
+        context.drawTexture(RenderPipelines.GUI_TEXTURED, sprite, client.getWindow().getScaledWidth() / 2 + x, client.getWindow().getScaledHeight() - y, 0, 0, width, height, width, height);
     }
 
 

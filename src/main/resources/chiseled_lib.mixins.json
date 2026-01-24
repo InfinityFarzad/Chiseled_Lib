@@ -4,9 +4,10 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LivingEntityMixin",
-    "PlayerEntityMixin",
     "PlayerEntityRiptideMixin",
-    "RiptideStackAccesor"
+    "RiptideStackAccesor",
+    "item.PlayerEntityMixin",
+    "item.ServerPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -15,7 +16,7 @@
     "requireAnnotations": true
   },
   "client": [
-    "CameraMixin",
-    "DrawContextMixin"
+    "DrawContextMixin",
+    "camera.CameraMixin"
   ]
 }
