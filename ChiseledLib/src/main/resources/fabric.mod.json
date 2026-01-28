@@ -6,7 +6,8 @@
 	"description": "chiseled lib is a library i made for Architektum Workshop to help with mod development and also to prevent us from repeatedly recoding the same thing for each project.",
 	"authors": [
 		"InfinityFarzad",
-		"MongoCat"
+		"MongoCat",
+        "Powercyphe"
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/project/chiseled-lib",

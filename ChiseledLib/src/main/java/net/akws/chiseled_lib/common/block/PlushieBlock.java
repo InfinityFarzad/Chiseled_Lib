@@ -18,6 +18,8 @@ import net.minecraft.world.BlockView;
 import java.util.Map;
 
 public class PlushieBlock extends Block {
+    //Currently Unused due to juko not making his plushie, if you want a juko plush check out plushiez by medecoole
+
     public static final MapCodec<PlushieBlock> CODEC = createCodec(PlushieBlock::new);
     public static final EnumProperty<Direction> FACING;
     public static Map<Direction, VoxelShape> SHAPES_BY_DIRECTION;

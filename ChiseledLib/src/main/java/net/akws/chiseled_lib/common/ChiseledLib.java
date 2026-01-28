@@ -25,15 +25,7 @@ public class ChiseledLib implements ModInitializer {
     @Override
     public void onInitialize() {
         ChiseledLibComponents.init();
-        ChiseledLibBlocks.init();
-
-        UseItemCallback.EVENT.register(((player, world, hand) -> {
-            ItemStack stack = player.getStackInHand(hand);
-            if (player instanceof ServerPlayerEntity serverPlayer && stack.isOf(ChiseledLibBlocks.MONGO_CAT_PLUSHIE.asItem())) {
-                ScreenshakePayload.send(serverPlayer, 60, serverPlayer.getEntityPos(), 7, 50);
-            }
-            return ActionResult.PASS;
-        }));
+        //ChiseledLibBlocks.init();
         this.initNetworking();
     }
 
