@@ -13,17 +13,10 @@ to import ChiseledLib, you have to add this line in your ``build.gradle``
 	  maven {
 		  url = "https://api.modrinth.com/maven"
 	  }
-          //add cardinal-components-api
-	  maven {
-		  name = "Ladysnake Mods"
-		  url = 'https://maven.ladysnake.org/releases'
-	  }
   }
 
   dependencies {
 	  modImplementation "maven.modrinth:chiseled-lib:${project.chiseled_lib_version}"
-	  modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cca_version}"
-	  modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
   }
 
 ```
@@ -31,8 +24,7 @@ to import ChiseledLib, you have to add this line in your ``build.gradle``
 and also add the chiseled_lib_version to your `gradle.properties` :
 
 ```Groovy
-  chiseled_lib_version=1.0.0
-  cca_version = 6.3.1
+  chiseled_lib_version=2.0.0
 
 ```
 you can find the latest version of the mod on our [Modrinth Page](https://modrinth.com/mod/chiseled-lib)
