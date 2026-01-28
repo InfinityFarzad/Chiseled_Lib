@@ -19,32 +19,17 @@
 		"main": [
 			"net.akws.chiseled_lib.common.ChiseledLib"
 		],
-		"fabric-datagen": [
-			"net.akws.chiseled_lib.common.datagen.ChiseledLibDataGenerator"
-		],
 		"client": [
 			"net.akws.chiseled_lib.client.ChiseledLibClient"
-		],
-		"cardinal-components":[
-			"net.akws.chiseled_lib.common.component.ChiseledCCARegistries"
 		]
 	},
 	"mixins": [
 		"chiseled_lib.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.16.14",
-		"minecraft": "~1.21.5",
+		"fabricloader": "*",
+		"minecraft": ">=1.21.11",
 		"java": ">=21",
-		"fabric-api": "*",
-		"cardinal-components-base": ">=6.3.1"
-	},
-	"suggests": {
-		"another-mod": "*"
-	},
-	"custom": {
-		"cardinal-components": [
-			"chiseled_lib:screenshake_component"
-		]
+		"fabric-api": "*"
 	}
 }

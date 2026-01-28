@@ -1,12 +1,8 @@
 package net.akws.chiseled_lib.common.util;
 
-import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.noise.PerlinNoiseSampler;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class ExplosionUtil {
 
