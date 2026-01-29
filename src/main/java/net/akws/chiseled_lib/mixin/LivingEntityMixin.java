@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class LivingEntityMixin {
 
     @Inject(method = "tick", at = @At("HEAD"))
-    private void twisted_and_carved$updateStrideStack(CallbackInfo ci) {
+    private void chiseledLib$updateRiptideStack(CallbackInfo ci) {
         LivingEntity entity = (LivingEntity) (Object) this;
         if (entity instanceof PlayerEntity playerEntity) {
             ((RiptideMixinInterface) playerEntity).chiseled_lib$setRiptideStack(((RiptideStackAccesor) playerEntity).stack());
