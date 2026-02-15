@@ -20,6 +20,7 @@ public class ChiseledLibClient implements ClientModInitializer {
                 ChiseledLibBlocks.JUKO_LUL_PLUSHIE
         );
 
+        //ClientTickEvents.END_CLIENT_TICK.register((minecraftClient -> ));
         ClientTickEvents.END_CLIENT_TICK.register((client) -> Screenshakes.get().tick());
         this.initNetworking();
     }

@@ -38,8 +38,8 @@ public class ChiseledLib implements ModInitializer {
         PayloadTypeRegistry.playS2C().register(ScreenshakePayload.ID, ScreenshakePayload.CODEC);
     }
     private static void runDebugCode() {
-        ChiseledLibBlocks.init();
-        UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
+        //ChiseledLibBlocks.init();
+/*        UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
             if (playerEntity.getMainHandStack().isOf(Items.BAMBOO)) {
                 ScreenShakeHelper.createLocalScreenshake(20 * 50,playerEntity.getEntityPos(),20,0.5f,world);
             }
@@ -48,6 +48,6 @@ public class ChiseledLib implements ModInitializer {
             }
             return ActionResult.PASS;
 
-        });
+        });*/
     }
 }
