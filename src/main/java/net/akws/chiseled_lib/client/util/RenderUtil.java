@@ -1,9 +1,14 @@
 package net.akws.chiseled_lib.client.util;
 
+import net.akws.chiseled_lib.common.payload.ExpandedParticlePayload;
+import net.akws.chiseled_lib.common.util.NetworkingUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 public class RenderUtil {
 
@@ -15,32 +20,8 @@ public class RenderUtil {
         context.drawTexture(RenderPipelines.GUI_TEXTURED, sprite, client.getWindow().getScaledWidth() / 2 + x, client.getWindow().getScaledHeight() - y, 0, 0, width, height, width, height);
     }
 
-
-    // DO NOT USE THESE, THEY ARE INCOMPLETE AND BUGGY
-
-    /*public static void renderCube(MatrixStack stack, VertexConsumer vertices, Vec3d pos, int color, float scale) {
-        float radius = scale / 2;
-        stack.push();
-        renderQuad(stack.peek(), vertices, new Vec3d(pos.x + radius, pos.y + radius, pos.z + radius), new Vec3d(pos.x - radius, pos.y + radius, pos.z + radius), new Vec3d(pos.x - radius, pos.y - radius, pos.z + radius), new Vec3d(pos.x + radius, pos.y - radius, pos.z + radius), color);
-        stack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90));
-        renderQuad(stack.peek(), vertices, new Vec3d(pos.x - radius, pos.y - radius, pos.z - radius), new Vec3d(pos.x + radius, pos.y - radius, pos.z - radius), new Vec3d(pos.x + radius, pos.y + radius, pos.z - radius), new Vec3d(pos.x - radius, pos.y + radius, pos.z - radius), color);
-        stack.pop();
+    public static void spawnParticle(World world, ParticleEffect parameters, boolean force, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+        NetworkingUtil.sendPacketToAllClients(world, new ExpandedParticlePayload(parameters,force,new Vec3d(x, y, z), new Vec3d(velocityX,velocityY,velocityZ)));
     }
-
-    public static void renderQuad(MatrixStack.Entry stack, VertexConsumer vertices, Vec3d firstPoint, Vec3d secondPoint, Vec3d thirdPoint, Vec3d forthPoint, int color) {
-        renderVertex(stack, vertices, firstPoint, color, 2, 2);
-        renderVertex(stack, vertices, secondPoint, color, 2, 2);
-        renderVertex(stack, vertices, thirdPoint, color, 2, 2);
-        renderVertex(stack, vertices, forthPoint, color, 2, 2);
-    }
-
-    public static void renderLine(MatrixStack.Entry stack, VertexConsumer vertices, Vec3d firstPoint, Vec3d secondPoint, int color) {
-        renderVertex(stack, vertices, firstPoint, color, 2, 2);
-        renderVertex(stack, vertices, secondPoint, color, 2, 2);
-    }
-
-    public static void renderVertex(MatrixStack.Entry stack, VertexConsumer vertices, Vec3d pos, int color, int u, int v) {
-        vertices.vertex(stack, (float) pos.x, (float) pos.y, (float) pos.z).overlay(OverlayTexture.DEFAULT_UV).color(color).normal(stack, (float) pos.x, (float) pos.y, (float) pos.z).texture(40, 40).light(503);
-    }*/
 
 }

@@ -3,12 +3,15 @@ package net.akws.chiseled_lib.common;
 import net.akws.chiseled_lib.client.camera.ScreenShakeHelper;
 import net.akws.chiseled_lib.client.camera.Screenshake;
 import net.akws.chiseled_lib.common.payload.EmitterParticlePayload;
+import net.akws.chiseled_lib.common.payload.ExpandedParticlePayload;
 import net.akws.chiseled_lib.common.payload.ScreenshakePayload;
 import net.akws.chiseled_lib.common.registries.ChiseledLibBlocks;
 import net.akws.chiseled_lib.common.registries.ChiseledLibComponents;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.render.entity.model.WitherEntityModel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.consume.UseAction;
@@ -36,10 +39,11 @@ public class ChiseledLib implements ModInitializer {
     public void initNetworking() {
         PayloadTypeRegistry.playS2C().register(EmitterParticlePayload.ID, EmitterParticlePayload.CODEC);
         PayloadTypeRegistry.playS2C().register(ScreenshakePayload.ID, ScreenshakePayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(ExpandedParticlePayload.ID, ExpandedParticlePayload.CODEC);
     }
     private static void runDebugCode() {
-        //ChiseledLibBlocks.init();
-/*        UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
+        ChiseledLibBlocks.init();
+        UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
             if (playerEntity.getMainHandStack().isOf(Items.BAMBOO)) {
                 ScreenShakeHelper.createLocalScreenshake(20 * 50,playerEntity.getEntityPos(),20,0.5f,world);
             }
@@ -48,6 +52,6 @@ public class ChiseledLib implements ModInitializer {
             }
             return ActionResult.PASS;
 
-        });*/
+        });
     }
 }

@@ -37,7 +37,7 @@ public class RegistryUtil {
             return FabricParticleTypes.complex(codec,packetCodec);
     }
 
-    public static SimpleParticleType registerParticle(Identifier id) {
+    public static SimpleParticleType registerSimpleParticle(Identifier id) {
         Registry.register(Registries.PARTICLE_TYPE,id, FabricParticleTypes.simple());
         return FabricParticleTypes.simple();
     }
