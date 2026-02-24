@@ -19,6 +19,7 @@ import java.util.Map;
 
 public class PlushieBlock extends Block {
     //Currently Unused due to juko not making his plushie, if you want a juko plush check out plushiez by medecoole
+    // JUKO MAKE YOUR FUCKING PLUSH ALREADY YOU GOD DAMN IVE BEEN WAITING FOR A YEAR
 
     public static final MapCodec<PlushieBlock> CODEC = createCodec(PlushieBlock::new);
     public static final EnumProperty<Direction> FACING;
