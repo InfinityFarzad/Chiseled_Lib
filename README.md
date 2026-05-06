@@ -10,6 +10,7 @@
 **W.I.P/Planned** :
 - Easing and interpolation utility
 - RegistryUtil **(DO NOT USE THE CURRENT VERSION)**
+- ShaderUtil and ScreenEffects
   
 ### How to use
 
