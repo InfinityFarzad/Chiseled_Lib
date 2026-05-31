@@ -1,6 +1,6 @@
 package net.akws.chiseled_lib.common.util;
 
-import net.akws.chiseled_lib.common.interfaces.mixin_interface.RiptideMixinInterface;
+import net.akws.chiseled_lib.mixin.RiptideStackAccesor;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -23,9 +23,9 @@ public class EnchantmentUtil {
     }
 
     public static ItemStack getRiptideStack(PlayerEntity player) {
-        ItemStack stack = ((RiptideMixinInterface) player).chiseled_lib$getRiptideStack();
+        ItemStack stack = ((RiptideStackAccesor) player).stack();
         if (stack != null) {
-            return ((RiptideMixinInterface) player).chiseled_lib$getRiptideStack();
+            return ((RiptideStackAccesor) player).stack();
         } else {
             return ItemStack.EMPTY;
         }

@@ -2,14 +2,22 @@ package net.akws.chiseled_lib.common;
 
 import net.akws.chiseled_lib.client.camera.ScreenShakeHelper;
 import net.akws.chiseled_lib.client.camera.Screenshake;
+import net.akws.chiseled_lib.common.interfaces.mixin_interface.TimerInterface;
 import net.akws.chiseled_lib.common.payload.EmitterParticlePayload;
 import net.akws.chiseled_lib.common.payload.ExpandedParticlePayload;
 import net.akws.chiseled_lib.common.payload.ScreenshakePayload;
 import net.akws.chiseled_lib.common.registries.ChiseledLibBlocks;
 import net.akws.chiseled_lib.common.registries.ChiseledLibComponents;
+import net.akws.chiseled_lib.common.util.TimerUtil;
+import net.akws.chiseled_lib.mixin.timer.PlayerTimerMixin;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.render.entity.model.WitherEntityModel;
 import net.minecraft.item.ItemStack;
@@ -32,6 +40,10 @@ public class ChiseledLib implements ModInitializer {
     @Override
     public void onInitialize() {
         ChiseledLibComponents.init();
+        ServerPlayerEvents.LEAVE.register(player -> {
+            ((TimerInterface)player).chiseledLib$clearTimersOnDisconnect();
+        });
+
         //runDebugCode();
         this.initNetworking();
     }

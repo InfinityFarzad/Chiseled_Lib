@@ -3,11 +3,10 @@
   "package": "net.akws.chiseled_lib.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "LivingEntityMixin",
-    "PlayerEntityRiptideMixin",
     "RiptideStackAccesor",
     "item.PlayerEntityMixin",
-    "item.ServerPlayerEntityMixin"
+    "item.ServerPlayerEntityMixin",
+    "timer.PlayerTimerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
