@@ -28,23 +28,7 @@ public class ChiseledLibClient implements ClientModInitializer {
         );
 
        ClientTickEvents.END_CLIENT_TICK.register((client) -> Screenshakes.get().tick());
-        this.initNetworking();
-
-
-        HudRenderCallback.EVENT.register((drawContext, renderTickCounter) -> {
-            if (MinecraftClient.getInstance() != null ) {
-                MinecraftClient client = MinecraftClient.getInstance();
-                PlayerEntity player = client.player;
-
-                drawContext.drawText(MinecraftClient.getInstance().textRenderer,
-                        String.valueOf(
-                                TimerUtil.getTimerTimeLeft(player, Identifier.of("ccc","d"))
-                        ),0,0,16777215,true
-                );
-
-            }
-
-        });
+       this.initNetworking();
 
     }
 

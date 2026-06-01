@@ -2,6 +2,8 @@ package net.akws.chiseled_lib.common.system.timer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 
 public class Timer {
 
@@ -34,15 +36,18 @@ public class Timer {
         this.disconnectImmune = disconnectImmune;
     }
 
-    /* - tick - */
+    /* - methods related to events - */
 
-    public void tick() {
+    public void tick(PlayerEntity player) {
         if (!(timeLeft-- <= 0) && !isRemoved()) {
             timeLeft--;
         } else {
             this.remove();
+            this.onFinished(player);
         }
     }
+
+    public void onFinished(PlayerEntity player) {}
 
     /* - conditions - */
 
@@ -63,7 +68,7 @@ public class Timer {
     }
 
     public boolean isFinished() {
-        return isRemoved() || getTimeLeft() - 1 <= 0;
+        return !isRemoved() && ((getTimeLeft() - 1.0f) <= 0.0f);
     }
 
     /* - getter and setter - */

@@ -1,8 +1,10 @@
 package net.akws.chiseled_lib.mixin.timer;
 
 import com.mojang.serialization.Codec;
+import net.akws.chiseled_lib.common.ChiseledLib;
 import net.akws.chiseled_lib.common.interfaces.mixin_interface.TimerInterface;
 import net.akws.chiseled_lib.common.system.timer.Timer;
+import net.akws.chiseled_lib.common.util.TimerUtil;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.storage.ReadView;
@@ -24,11 +26,14 @@ public class PlayerTimerMixin implements TimerInterface {
 
 
     public void chiseledLib$addTimer(Timer timer, Identifier identifier) {
+        if (storedTimers.containsKey(identifier)) {
+            storedTimers.remove(identifier);
+        }
         storedTimers.put(identifier,timer);
     }
 
     public Timer chiseledLib$getTimer(Identifier identifier) {
-        return storedTimers.get(identifier);
+        return storedTimers.get(identifier) != null ? storedTimers.get(identifier) : new Timer(0.0f);
     }
 
     public void chiseledLib$clearTimersOnDisconnect() {
@@ -39,25 +44,29 @@ public class PlayerTimerMixin implements TimerInterface {
         }
     }
 
-    public void chiseledLib$setTimer(Identifier identifier, float value) {
-        if (storedTimers.containsKey(identifier)) {
-            storedTimers.remove(identifier);
+    @Override
+    public void chiseledLib$getTimers() {
+        for (Identifier ide : storedTimers.keySet()) {
+            System.out.println(ide.getNamespace() + ide.getPath() + storedTimers.get(ide));
         }
-        storedTimers.put(identifier,new Timer(value));
+    }
+
+    @Override
+    public boolean chiseledLib$containsTimer(Identifier identifier) {
+        return storedTimers.containsKey(identifier);
     }
 
     /* -* {  what am i doing again  } *- */
 
     @Inject(method = "tick",at =@At("HEAD"))
     private void chiseledLib$tickTimers(CallbackInfo ci) {
-        PlayerEntity player = (PlayerEntity) (Object)this;
-        World world = player.getEntityWorld();
-
-        for (Timer timer : storedTimers.values()) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        for (Identifier id : storedTimers.keySet()) {
+            Timer timer = storedTimers.get(id);
             if (timer.isRemoved()) {
-                storedTimers.remove(timer);
+                storedTimers.remove(id);
             } else {
-                timer.tick();
+                timer.tick(player);
             }
         }
 
