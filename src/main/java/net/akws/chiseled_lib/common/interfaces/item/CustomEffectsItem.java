@@ -1,45 +1,46 @@
 package net.akws.chiseled_lib.common.interfaces.item;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.sound.SoundEvent;
 
 public interface CustomEffectsItem {
 
-    default boolean hasCustomParticleLogic(ParticleType particleType) {
+    default boolean hasCustomParticleLogic(ParticleType particleType, ItemStack stack) {
         return false;
     }
 
-    default void useCustomParticleLogic(ParticleType particleType) {}
+    default void useCustomParticleLogic(ParticleType particleType, ItemStack stack) {}
 
-    default SoundEvent critSound() {
+    default SoundEvent critSound(ItemStack stack) {
         return null;
     }
 
-    default SoundEvent sweepSound() {
+    default SoundEvent sweepSound(ItemStack stack) {
         return null;
     }
 
-    default SoundEvent knockbackSound() {
+    default SoundEvent knockbackSound(ItemStack stack) {
         return null;
     }
 
-    default SoundEvent strongSound() {
+    default SoundEvent strongSound(ItemStack stack) {
         return null;
     }
 
-    default SoundEvent weakSound() {
+    default SoundEvent weakSound(ItemStack stack) {
         return null;
     }
 
-    default ParticleEffect critParticles() {
+    default ParticleEffect critParticles(ItemStack stack) {
         return null;
     }
 
-    default ParticleEffect enchantedCritParticles() {
+    default ParticleEffect enchantedCritParticles(ItemStack stack) {
         return null;
     }
 
-    default ParticleEffect sweepParticles() {
+    default ParticleEffect sweepParticles(ItemStack stack) {
         return null;
     }
 

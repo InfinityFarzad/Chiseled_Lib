@@ -8,7 +8,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class ScreenShakeHelper {
-    public static void createGlobalScreenshake(World world,int duration,int intensity) {
+    public static void createGlobalScreenshake(World world,int duration,float intensity) {
         for (PlayerEntity player : world.getPlayers()) {
             ScreenshakePayload.send(player,duration,new Vec3d(0,0,0), Float.MAX_VALUE,intensity);
         }

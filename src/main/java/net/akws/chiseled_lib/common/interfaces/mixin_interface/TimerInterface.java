@@ -8,9 +8,10 @@ import org.spongepowered.asm.mixin.Unique;
 
 public interface TimerInterface {
 
-    void chiseledLib$addTimer(Timer timer, Identifier identifier);
+    void chiseledLib$addTimer(Timer timer);
     Timer chiseledLib$getTimer(Identifier identifier);
     void chiseledLib$clearTimersOnDisconnect();
-    void chiseledLib$getTimers();
+    void chiseledLib$syncTimerAttachment();
+    void chiseledLib$initTimerHash();
     boolean chiseledLib$containsTimer(Identifier identifier);
 }

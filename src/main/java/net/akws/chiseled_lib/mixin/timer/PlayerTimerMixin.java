@@ -25,15 +25,15 @@ public class PlayerTimerMixin implements TimerInterface {
     private HashMap<Identifier, Timer> storedTimers = new HashMap<>();
 
 
-    public void chiseledLib$addTimer(Timer timer, Identifier identifier) {
-        if (storedTimers.containsKey(identifier)) {
-            storedTimers.remove(identifier);
+    public void chiseledLib$addTimer(Timer timer) {
+        if (storedTimers.containsKey(timer.getId())) {
+            storedTimers.remove(timer.getId());
         }
-        storedTimers.put(identifier,timer);
+        storedTimers.put(timer.getId(),timer);
     }
 
     public Timer chiseledLib$getTimer(Identifier identifier) {
-        return storedTimers.get(identifier) != null ? storedTimers.get(identifier) : new Timer(0.0f);
+        return storedTimers.get(identifier) != null ? storedTimers.get(identifier) : new Timer(0.0f, identifier);
     }
 
     public void chiseledLib$clearTimersOnDisconnect() {
@@ -45,10 +45,15 @@ public class PlayerTimerMixin implements TimerInterface {
     }
 
     @Override
-    public void chiseledLib$getTimers() {
-        for (Identifier ide : storedTimers.keySet()) {
-            System.out.println(ide.getNamespace() + ide.getPath() + storedTimers.get(ide));
-        }
+    public void chiseledLib$syncTimerAttachment() {
+        PlayerEntity player = (PlayerEntity) (Object)this;
+        player.setAttached(ChiseledLib.TIMER_ATTACHMENT,this.storedTimers);
+    }
+
+    @Override
+    public void chiseledLib$initTimerHash() {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        this.storedTimers = new HashMap<Identifier, Timer>(player.getAttachedOrElse(ChiseledLib.TIMER_ATTACHMENT, new HashMap<Identifier, Timer>()));
     }
 
     @Override
@@ -69,7 +74,6 @@ public class PlayerTimerMixin implements TimerInterface {
                 timer.tick(player);
             }
         }
-
     }
 
     @Inject(method = "onDeath",at =@At("HEAD"))
@@ -79,16 +83,6 @@ public class PlayerTimerMixin implements TimerInterface {
                 timer.remove();
             }
         }
-    }
-
-    @Inject(method = "writeCustomData", at = @At("TAIL"))
-    private void chiseledLib$writeCustomDataTimer(WriteView view, CallbackInfo ci) {
-        view.put("storedTimers", Codec.unboundedMap(Identifier.CODEC, Timer.CODEC),storedTimers);
-    }
-
-    @Inject(method = "readCustomData", at = @At("TAIL"))
-    private void chiseledLib$readCustomDataTimer(ReadView view, CallbackInfo ci) {
-        view.read("storedTimers",Codec.unboundedMap(Identifier.CODEC, Timer.CODEC));
     }
 
 }

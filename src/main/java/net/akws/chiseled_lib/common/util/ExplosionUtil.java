@@ -5,8 +5,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ExplosionUtil {
-
+    
     public static void createSphericalExplosion(World world, BlockPos center, int radius, boolean doBlockDrops) {
+
         for (int x = -radius; x <= radius; x++) {
             for (int y = -radius; y <= radius; y++) {
                 for (int z = -radius; z <= radius; z++) {

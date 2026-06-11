@@ -69,11 +69,11 @@ public abstract class PlayerEntityMixin {
         ItemStack stack = player.getStackInHand(Hand.MAIN_HAND);
 
         if (stack.getItem() instanceof CustomEffectsItem effectsItem) {
-            if (effectsItem.hasCustomParticleLogic(CustomEffectsItem.ParticleType.SWEEP)) {
-                effectsItem.useCustomParticleLogic(CustomEffectsItem.ParticleType.SWEEP);
+            if (effectsItem.hasCustomParticleLogic(CustomEffectsItem.ParticleType.SWEEP, stack)) {
+                effectsItem.useCustomParticleLogic(CustomEffectsItem.ParticleType.SWEEP, stack);
                 return 0;
-            } else if (effectsItem.sweepParticles() != null) {
-                particleEffect = effectsItem.sweepParticles();
+            } else if (effectsItem.sweepParticles(stack) != null) {
+                particleEffect = effectsItem.sweepParticles(stack);
             }
         }
 
@@ -86,8 +86,8 @@ public abstract class PlayerEntityMixin {
         ItemStack stack = player.getStackInHand(Hand.MAIN_HAND);
 
         if (stack.getItem() instanceof CustomEffectsItem effectsItem) {
-            if (effectsItem.sweepSound() != null) {
-                return effectsItem.sweepSound();
+            if (effectsItem.sweepSound(stack) != null) {
+                return effectsItem.sweepSound(stack);
             }
         }
         return sound;
@@ -99,8 +99,8 @@ public abstract class PlayerEntityMixin {
         ItemStack stack = player.getStackInHand(Hand.MAIN_HAND);
 
         if (stack.getItem() instanceof CustomEffectsItem effectsItem) {
-            if (effectsItem.knockbackSound() != null) {
-                return effectsItem.knockbackSound();
+            if (effectsItem.knockbackSound(stack) != null) {
+                return effectsItem.knockbackSound(stack);
             }
         }
         return sound;
@@ -112,8 +112,8 @@ public abstract class PlayerEntityMixin {
         ItemStack stack = player.getStackInHand(Hand.MAIN_HAND);
 
         if (stack.getItem() instanceof CustomEffectsItem effectsItem) {
-            if (effectsItem.critSound() != null) {
-                return effectsItem.critSound();
+            if (effectsItem.critSound(stack) != null) {
+                return effectsItem.critSound(stack);
             }
         }
         return sound;
@@ -125,12 +125,12 @@ public abstract class PlayerEntityMixin {
 
         if (stack.getItem() instanceof CustomEffectsItem effectsItem) {
             if (cooldownPassed) {
-                if (effectsItem.strongSound() != null) {
-                    original.call(player, effectsItem.strongSound());
+                if (effectsItem.strongSound(stack) != null) {
+                    original.call(player, effectsItem.strongSound(stack));
                     return;
                 }
-            } else if (effectsItem.weakSound() != null) {
-                original.call(player, effectsItem.weakSound());
+            } else if (effectsItem.weakSound(stack) != null) {
+                original.call(player, effectsItem.weakSound(stack));
                 return;
             }
         }

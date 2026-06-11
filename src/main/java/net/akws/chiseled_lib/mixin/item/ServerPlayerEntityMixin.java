@@ -24,11 +24,11 @@ public class ServerPlayerEntityMixin {
             ItemStack stack = player.getStackInHand(Hand.MAIN_HAND);
 
             if (stack.getItem() instanceof CustomEffectsItem effectsItem) {
-                if (effectsItem.hasCustomParticleLogic(CustomEffectsItem.ParticleType.CRIT)) {
-                    effectsItem.useCustomParticleLogic(CustomEffectsItem.ParticleType.CRIT);
+                if (effectsItem.hasCustomParticleLogic(CustomEffectsItem.ParticleType.CRIT, stack)) {
+                    effectsItem.useCustomParticleLogic(CustomEffectsItem.ParticleType.CRIT, stack);
                     return;
-                } else if (effectsItem.critParticles() != null) {
-                    ServerPlayNetworking.send(player, new EmitterParticlePayload(target.getId(), effectsItem.critParticles()));
+                } else if (effectsItem.critParticles(stack) != null) {
+                    ServerPlayNetworking.send(player, new EmitterParticlePayload(target.getId(), effectsItem.critParticles(stack)));
                     return;
                 }
             }
@@ -43,11 +43,11 @@ public class ServerPlayerEntityMixin {
             ItemStack stack = player.getStackInHand(Hand.MAIN_HAND);
 
             if (stack.getItem() instanceof CustomEffectsItem effectsItem) {
-                if (effectsItem.hasCustomParticleLogic(CustomEffectsItem.ParticleType.ENCHANTED_CRIT)) {
-                    effectsItem.useCustomParticleLogic(CustomEffectsItem.ParticleType.ENCHANTED_CRIT);
+                if (effectsItem.hasCustomParticleLogic(CustomEffectsItem.ParticleType.ENCHANTED_CRIT, stack)) {
+                    effectsItem.useCustomParticleLogic(CustomEffectsItem.ParticleType.ENCHANTED_CRIT, stack);
                     return;
-                } else if (effectsItem.enchantedCritParticles() != null) {
-                    ServerPlayNetworking.send(player, new EmitterParticlePayload(target.getId(), effectsItem.enchantedCritParticles()));
+                } else if (effectsItem.enchantedCritParticles(stack) != null) {
+                    ServerPlayNetworking.send(player, new EmitterParticlePayload(target.getId(), effectsItem.enchantedCritParticles(stack)));
                     return;
                 }
             }
