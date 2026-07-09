@@ -17,7 +17,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Mixin(PlayerEntity.class)
 public class PlayerTimerMixin implements TimerInterface {
@@ -66,14 +68,19 @@ public class PlayerTimerMixin implements TimerInterface {
     @Inject(method = "tick",at =@At("HEAD"))
     private void chiseledLib$tickTimers(CallbackInfo ci) {
         PlayerEntity player = (PlayerEntity) (Object) this;
+        List<Identifier> removetimers = new ArrayList<>();
         for (Identifier id : storedTimers.keySet()) {
             Timer timer = storedTimers.get(id);
             if (timer.isRemoved()) {
-                storedTimers.remove(id);
+                removetimers.add(id);
+
             } else {
                 timer.tick(player);
             }
         }
+        removetimers.forEach((id) ->
+            storedTimers.remove(id)
+        );
     }
 
     @Inject(method = "onDeath",at =@At("HEAD"))

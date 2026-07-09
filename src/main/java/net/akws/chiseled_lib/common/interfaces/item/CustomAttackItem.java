@@ -5,9 +5,15 @@ import net.minecraft.item.ItemStack;
 
 public interface CustomAttackItem {
 
-    boolean canDoSweepingAttack(ItemStack stack, boolean cooldownPassed, boolean criticalHit, boolean knockbackAttack);
+    default boolean canDoSweepingAttack(ItemStack stack, boolean cooldownPassed, boolean criticalHit, boolean knockbackAttack) {
+        return true;
+    }
 
-    void onCritAttack(LivingEntity attacker, LivingEntity target, ItemStack stack);
-    void onFullAttack(LivingEntity attacker, LivingEntity target, ItemStack stack);
-    void onSweepAttack(LivingEntity attacker, LivingEntity target, ItemStack stack);
+    default void onAttackWithProgress(LivingEntity attacker, LivingEntity target, ItemStack stack) {}
+
+    default void onCritAttack(LivingEntity attacker, LivingEntity target, ItemStack stack) {}
+
+    default void onFullAttack(LivingEntity attacker, LivingEntity target, ItemStack stack) {}
+
+    default void onSweepAttack(LivingEntity attacker, LivingEntity target, ItemStack stack) {}
 }

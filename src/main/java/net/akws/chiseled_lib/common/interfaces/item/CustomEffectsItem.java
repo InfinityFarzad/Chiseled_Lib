@@ -44,6 +44,8 @@ public interface CustomEffectsItem {
         return null;
     }
 
+    default boolean swingHand(ItemStack stack) {return true;}
+
     enum ParticleType {
         CRIT,
         ENCHANTED_CRIT,

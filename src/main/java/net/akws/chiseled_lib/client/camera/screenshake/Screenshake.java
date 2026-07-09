@@ -1,4 +1,4 @@
-package net.akws.chiseled_lib.client.camera;
+package net.akws.chiseled_lib.client.camera.screenshake;
 
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;

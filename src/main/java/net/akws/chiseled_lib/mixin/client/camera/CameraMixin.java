@@ -1,6 +1,6 @@
-package net.akws.chiseled_lib.mixin.camera;
+package net.akws.chiseled_lib.mixin.client.camera;
 
-import net.akws.chiseled_lib.client.camera.Screenshakes;
+import net.akws.chiseled_lib.client.camera.screenshake.Screenshakes;
 import net.minecraft.client.render.Camera;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;

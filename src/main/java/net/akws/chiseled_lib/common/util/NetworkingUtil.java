@@ -1,5 +1,6 @@
 package net.akws.chiseled_lib.common.util;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.packet.CustomPayload;
@@ -20,7 +21,7 @@ public class NetworkingUtil {
     public static void sendPacketToAllNearbyClients(World world, CustomPayload payload, Vec3d pos, double radius) {
         if (!world.isClient() && world instanceof ServerWorld serverWorld) {
             for (ServerPlayerEntity player : PlayerLookup.around(serverWorld,pos,radius)) {
-                ServerPlayNetworking.send(player,payload);
+                ServerPlayNetworking.send(player, payload);
             }
         }
     }

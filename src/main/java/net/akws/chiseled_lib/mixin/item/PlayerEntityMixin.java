@@ -33,11 +33,15 @@ public abstract class PlayerEntityMixin {
         PlayerEntity player = (PlayerEntity) (Object)this;
         ItemStack weapon = player.getWeaponStack();
         float attackCooldownProgress = player.getAttackCooldownProgress(0.5f);
-        if (attackCooldownProgress > 0.9 && target instanceof LivingEntity living && weapon.getItem() instanceof CustomAttackItem attackItem) {
-            if (isCriticalHit(target)) {
-                attackItem.onCritAttack(player,living,weapon);
+        if (weapon.getItem() instanceof CustomAttackItem attackItem && target instanceof LivingEntity living) {
+            if (attackCooldownProgress > 0.9) {
+                if (isCriticalHit(target)) {
+                    attackItem.onCritAttack(player,living,weapon);
+                }
+                attackItem.onFullAttack(player,living,weapon);
             }
-            attackItem.onFullAttack(player,living,weapon);
+            attackItem.onAttackWithProgress(player,living,weapon);
+
         }
 
     }

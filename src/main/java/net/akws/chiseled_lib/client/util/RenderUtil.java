@@ -12,7 +12,8 @@ import net.minecraft.world.World;
 
 public class RenderUtil {
 
-    public static void renderScreenOverlay(DrawContext context, MinecraftClient client, Identifier sprite) {
+    public static void renderScreenOverlay(DrawContext context, Identifier sprite) {
+        MinecraftClient client = MinecraftClient.getInstance();
         context.drawTexture(RenderPipelines.GUI_TEXTURED, sprite, 0, 0, client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight(), client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight(), client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight());
     }
 

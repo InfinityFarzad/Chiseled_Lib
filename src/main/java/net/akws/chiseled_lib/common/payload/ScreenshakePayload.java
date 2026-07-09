@@ -1,7 +1,7 @@
 package net.akws.chiseled_lib.common.payload;
 
 import io.netty.buffer.ByteBuf;
-import net.akws.chiseled_lib.client.camera.Screenshakes;
+import net.akws.chiseled_lib.client.camera.screenshake.Screenshakes;
 import net.akws.chiseled_lib.common.ChiseledLib;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;

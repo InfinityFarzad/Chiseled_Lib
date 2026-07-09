@@ -1,9 +1,8 @@
-package net.akws.chiseled_lib.client.camera;
+package net.akws.chiseled_lib.client.camera.screenshake;
 
 import net.akws.chiseled_lib.common.payload.ScreenshakePayload;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 

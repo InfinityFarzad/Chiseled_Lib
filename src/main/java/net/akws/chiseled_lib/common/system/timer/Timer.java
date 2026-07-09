@@ -44,7 +44,6 @@ public class Timer {
     /* - methods related to events - */
 
     public void tick(PlayerEntity player) {
-        System.out.println("i exist");
         if (!(timeLeft-- <= 0) && !isRemoved()) {
             timeLeft--;
         } else {

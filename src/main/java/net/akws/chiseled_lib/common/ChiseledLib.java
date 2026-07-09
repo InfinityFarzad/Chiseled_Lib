@@ -1,12 +1,11 @@
 package net.akws.chiseled_lib.common;
 
 import com.mojang.serialization.Codec;
-import net.akws.chiseled_lib.client.camera.ScreenShakeHelper;
+import net.akws.chiseled_lib.client.camera.screenshake.ScreenShakeHelper;
 import net.akws.chiseled_lib.common.interfaces.mixin_interface.TimerInterface;
 import net.akws.chiseled_lib.common.payload.EmitterParticlePayload;
 import net.akws.chiseled_lib.common.payload.ExpandedParticlePayload;
 import net.akws.chiseled_lib.common.payload.ScreenshakePayload;
-import net.akws.chiseled_lib.common.registries.ChiseledLibBlocks;
 import net.akws.chiseled_lib.common.registries.ChiseledLibComponents;
 import net.akws.chiseled_lib.common.system.timer.Timer;
 import net.akws.chiseled_lib.common.system.timer.TimerTimeoutEvent;
@@ -60,8 +59,8 @@ public class ChiseledLib implements ModInitializer {
         PayloadTypeRegistry.playS2C().register(ScreenshakePayload.ID, ScreenshakePayload.CODEC);
         PayloadTypeRegistry.playS2C().register(ExpandedParticlePayload.ID, ExpandedParticlePayload.CODEC);
     }
+
     private static void runDebugCode() {
-        ChiseledLibBlocks.init();
         UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
             if (playerEntity.getStackInHand(hand).isOf(Items.ACACIA_PLANKS)) {
                 TimerUtil.addTimerToPlayer(playerEntity,new Timer(20*4,id("wa")));

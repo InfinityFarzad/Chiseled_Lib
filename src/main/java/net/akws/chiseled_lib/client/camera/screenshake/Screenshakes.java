@@ -1,4 +1,4 @@
-package net.akws.chiseled_lib.client.camera;
+package net.akws.chiseled_lib.client.camera.screenshake;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

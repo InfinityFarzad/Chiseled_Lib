@@ -16,8 +16,8 @@ public class TimerUtil {
     public static float getTimerTimeLeft(PlayerEntity player,Identifier timerId) {
         return ((TimerInterface)player).chiseledLib$getTimer(timerId).getTimeLeft();
     }
+
     public static boolean isTimerFinished(PlayerEntity player, Identifier timerId) {
         return ((TimerInterface)player).chiseledLib$getTimer(timerId).isFinished() && ((TimerInterface)player).chiseledLib$containsTimer(timerId);
     }
-
 }
