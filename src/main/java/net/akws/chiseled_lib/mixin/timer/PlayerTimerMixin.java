@@ -1,16 +1,11 @@
 package net.akws.chiseled_lib.mixin.timer;
 
-import com.mojang.serialization.Codec;
 import net.akws.chiseled_lib.common.ChiseledLib;
 import net.akws.chiseled_lib.common.interfaces.mixin_interface.TimerInterface;
 import net.akws.chiseled_lib.common.system.timer.Timer;
-import net.akws.chiseled_lib.common.util.TimerUtil;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,11 +16,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@Mixin(PlayerEntity.class)
-public class PlayerTimerMixin implements TimerInterface {
+@Mixin(Player.class)
+public abstract class PlayerTimerMixin implements TimerInterface {
     @Unique
     private HashMap<Identifier, Timer> storedTimers = new HashMap<>();
-
 
     public void chiseledLib$addTimer(Timer timer) {
         if (storedTimers.containsKey(timer.getId())) {
@@ -34,9 +28,9 @@ public class PlayerTimerMixin implements TimerInterface {
         storedTimers.put(timer.getId(),timer);
     }
 
-    public Timer chiseledLib$getTimer(Identifier identifier) {
+/*    public Timer chiseledLib$getTimer(Identifier identifier) {
         return storedTimers.get(identifier) != null ? storedTimers.get(identifier) : new Timer(0.0f, identifier);
-    }
+    }*/
 
     public void chiseledLib$clearTimersOnDisconnect() {
         for (Timer timer : storedTimers.values()) {
@@ -48,17 +42,17 @@ public class PlayerTimerMixin implements TimerInterface {
 
     @Override
     public void chiseledLib$syncTimerAttachment() {
-        PlayerEntity player = (PlayerEntity) (Object)this;
+        Player player = (Player) (Object)this;
         player.setAttached(ChiseledLib.TIMER_ATTACHMENT,this.storedTimers);
     }
 
     @Override
     public void chiseledLib$initTimerHash() {
-        PlayerEntity player = (PlayerEntity) (Object) this;
+        Player player = (Player) (Object) this;
         this.storedTimers = new HashMap<Identifier, Timer>(player.getAttachedOrElse(ChiseledLib.TIMER_ATTACHMENT, new HashMap<Identifier, Timer>()));
     }
 
-    @Override
+    @Unique
     public boolean chiseledLib$containsTimer(Identifier identifier) {
         return storedTimers.containsKey(identifier);
     }
@@ -67,7 +61,7 @@ public class PlayerTimerMixin implements TimerInterface {
 
     @Inject(method = "tick",at =@At("HEAD"))
     private void chiseledLib$tickTimers(CallbackInfo ci) {
-        PlayerEntity player = (PlayerEntity) (Object) this;
+        Player player = (Player) (Object) this;
         List<Identifier> removetimers = new ArrayList<>();
         for (Identifier id : storedTimers.keySet()) {
             Timer timer = storedTimers.get(id);
@@ -83,7 +77,7 @@ public class PlayerTimerMixin implements TimerInterface {
         );
     }
 
-    @Inject(method = "onDeath",at =@At("HEAD"))
+    @Inject(method = "die",at =@At("HEAD"))
     private void chiseledLib$clearTimersOnDeath(DamageSource damageSource, CallbackInfo ci) {
         for (Timer timer : storedTimers.values()) {
             if (timer.isImmuneToDeath()) {

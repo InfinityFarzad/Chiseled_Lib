@@ -2,8 +2,8 @@ package net.akws.chiseled_lib.client.camera.screenflash;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class Flashes {
         flashList.removeAll(removeQueue);
     }
 
-    public void render(DrawContext context, RenderTickCounter delta) {
+    public void render(GuiGraphicsExtractor context, DeltaTracker delta) {
         for (Flash flash : flashList) {
             flash.render(context,delta);
         }

@@ -2,8 +2,8 @@ package net.akws.chiseled_lib.client.camera.screenshake;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class Screenshakes implements Iterable<Screenshake> {
         return INSTANCE;
     }
 
-    public void create(int duration, Vec3d pos, float radius, float intensity) {
+    public void create(int duration, Vec3 pos, float radius, float intensity) {
         this.create(new Screenshake(duration, pos, radius, intensity));
     }
 
@@ -45,7 +45,7 @@ public class Screenshakes implements Iterable<Screenshake> {
         float sway = 0F;
 
         for (Screenshake screenshake : this) {
-            float distance = (float) screenshake.pos.distanceTo(camEntity.getEyePos());
+            float distance = (float) screenshake.pos.distanceTo(camEntity.getEyePosition());
 
             if (distance < screenshake.radius) {
                 float disMultiplier = 1 - (distance / screenshake.radius);

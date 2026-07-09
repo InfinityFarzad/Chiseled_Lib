@@ -3,11 +3,11 @@
 	"id": "chiseled_lib",
 	"version": "${version}",
 	"name": "Chiseled Lib",
-	"description": "chiseled lib is a library i made for Architektum Workshop to help with mod development and also to prevent us from repeatedly recoding the same thing for each project.",
+	"description": "chiseled lib is a library made for Architektum Workshop to help with mod development.",
 	"authors": [
 		"InfinityFarzad",
 		"MongoCat",
-        "Powercyphe"
+		"Powercyphe"
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/project/chiseled-lib",
@@ -28,9 +28,9 @@
 		"chiseled_lib.mixins.json"
 	],
 	"depends": {
-		"fabricloader": "*",
-		"minecraft": ">=1.21.11",
-		"java": ">=21",
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.1",
+		"java": ">=25",
 		"fabric-api": "*"
 	}
 }

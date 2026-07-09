@@ -1,8 +1,8 @@
 package net.akws.chiseled_lib.common.interfaces.item;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.ItemStack;
 
 public interface CustomEffectsItem {
 
@@ -12,7 +12,7 @@ public interface CustomEffectsItem {
 
     default void useCustomParticleLogic(ParticleType particleType, ItemStack stack) {}
 
-    default SoundEvent critSound(ItemStack stack) {
+    default net.minecraft.sounds.SoundEvent critSound(ItemStack stack) {
         return null;
     }
 
@@ -32,15 +32,15 @@ public interface CustomEffectsItem {
         return null;
     }
 
-    default ParticleEffect critParticles(ItemStack stack) {
+    default ParticleOptions critParticles(ItemStack stack) {
         return null;
     }
 
-    default ParticleEffect enchantedCritParticles(ItemStack stack) {
+    default ParticleOptions enchantedCritParticles(ItemStack stack) {
         return null;
     }
 
-    default ParticleEffect sweepParticles(ItemStack stack) {
+    default ParticleOptions sweepParticles(ItemStack stack) {
         return null;
     }
 

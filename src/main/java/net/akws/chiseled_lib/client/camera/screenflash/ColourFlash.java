@@ -1,8 +1,8 @@
 package net.akws.chiseled_lib.client.camera.screenflash;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class ColourFlash extends Flash {
     protected int colour;
@@ -18,10 +18,10 @@ public class ColourFlash extends Flash {
         super.remove();
     }
 
-    public void render(DrawContext context, RenderTickCounter tickCounter) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        int maxX = client.getWindow().getWidth();
-        int maxY = client.getWindow().getHeight();
+    public void render(GuiGraphicsExtractor context, DeltaTracker tickCounter) {
+        Minecraft client = Minecraft.getInstance();
+        int maxX = client.getWindow().getScreenWidth();
+        int maxY = client.getWindow().getScreenHeight();
         context.fill(0, 0, maxX, maxY, colour);
     }
 }

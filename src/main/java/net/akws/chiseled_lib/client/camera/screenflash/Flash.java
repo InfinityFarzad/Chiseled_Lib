@@ -1,7 +1,7 @@
 package net.akws.chiseled_lib.client.camera.screenflash;
 
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class Flash {
 
@@ -28,5 +28,5 @@ public class Flash {
         this.removed =true;
     }
 
-    public void render(DrawContext context, RenderTickCounter tickCounter) {}
+    public void render(GuiGraphicsExtractor context, DeltaTracker tickCounter) {}
 }

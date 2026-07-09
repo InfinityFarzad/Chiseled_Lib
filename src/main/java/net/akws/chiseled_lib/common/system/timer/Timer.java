@@ -2,9 +2,8 @@ package net.akws.chiseled_lib.common.system.timer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.timer.TimerCallback;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.player.Player;
 
 public class Timer {
 
@@ -43,7 +42,7 @@ public class Timer {
 
     /* - methods related to events - */
 
-    public void tick(PlayerEntity player) {
+    public void tick(Player player) {
         if (!(timeLeft-- <= 0) && !isRemoved()) {
             timeLeft--;
         } else {
@@ -51,7 +50,7 @@ public class Timer {
         }
     }
 
-    public void onTimeout(PlayerEntity player) {
+    public void onTimeout(Player player) {
         TimerTimeoutEvent.EVENT.invoker().timeout(player,this.getId());
         this.remove();
     }

@@ -3,17 +3,17 @@ package net.akws.chiseled_lib.mixin.item;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.akws.chiseled_lib.common.interfaces.item.CustomEffectsItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.Hand;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
-    @WrapOperation(method = "swingHand(Lnet/minecraft/util/Hand;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;swingHand(Lnet/minecraft/util/Hand;Z)V"))
-    private void chiseledLib$cancelHandSwing(LivingEntity instance, Hand hand, boolean fromServerPlayer, Operation<Void> original) {
-        if (instance.getStackInHand(hand).getItem() instanceof CustomEffectsItem effectsItem) {
-            if (effectsItem.swingHand(instance.getStackInHand(hand))) {
+    @WrapOperation(method = "swing(Lnet/minecraft/world/InteractionHand;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;swing(Lnet/minecraft/world/InteractionHand;Z)V"))
+    private void chiseledLib$cancelHandSwing(LivingEntity instance, InteractionHand hand, boolean fromServerPlayer, Operation<Void> original) {
+        if (instance.getItemInHand(hand).getItem() instanceof CustomEffectsItem effectsItem) {
+            if (effectsItem.swingHand(instance.getItemInHand(hand))) {
                 original.call(instance,hand,fromServerPlayer);
             }
         }

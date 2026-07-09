@@ -1,11 +1,11 @@
 package net.akws.chiseled_lib.client.camera.screenflash;
 
 import net.akws.chiseled_lib.client.util.RenderUtil;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.resources.Identifier;
 public class ImageFlash extends Flash {
 
     protected Identifier sprite;
@@ -22,8 +22,7 @@ public class ImageFlash extends Flash {
         System.out.println("fuck");
     }
 
-    public void render(DrawContext context, RenderTickCounter tickCounter) {
-        MinecraftClient client = MinecraftClient.getInstance();
+    public void render(GuiGraphicsExtractor context, DeltaTracker tickCounter) {
         RenderUtil.renderScreenOverlay(context,sprite);
     }
 }

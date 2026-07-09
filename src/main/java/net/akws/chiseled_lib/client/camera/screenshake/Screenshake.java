@@ -1,20 +1,21 @@
 package net.akws.chiseled_lib.client.camera.screenshake;
 
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
+
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.Vec3;
 
 public class Screenshake {
-    private Random random = Random.create();
+    private RandomSource random = RandomSource.create();
 
     public int fullDuration;
     public int duration;
-    public final Vec3d pos;
+    public final Vec3 pos;
     public final float radius;
     public final float intensity;
 
     private boolean removed = false;
 
-    protected Screenshake(int duration, Vec3d pos, float radius, float intensity) {
+    protected Screenshake(int duration, Vec3 pos, float radius, float intensity) {
         this.fullDuration = duration;
         this.duration = duration;
         this.pos = pos;
@@ -41,7 +42,7 @@ public class Screenshake {
         this.removed = true;
     }
 
-    public Random getRandom() {
+    public RandomSource getRandom() {
         return this.random;
     }
 

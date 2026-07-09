@@ -1,23 +1,23 @@
 {
-  "required": true,
-  "package": "net.akws.chiseled_lib.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "RiptideStackAccesor",
-    "item.LivingEntityMixin",
-    "item.PlayerEntityMixin",
-    "item.ServerPlayerEntityMixin",
-    "timer.PlayerTimerMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  },
-  "overwrites": {
-    "requireAnnotations": true
-  },
-  "client": [
-    "DrawContextMixin",
-    "client.camera.CameraMixin",
-    "client.flash.GuiFlashMixin"
-  ]
+	"required": true,
+	"package": "net.akws.chiseled_lib.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"RiptideStackAccesor",
+		"item.LivingEntityMixin",
+		"item.PlayerEntityMixin",
+		"item.ServerPlayerEntityMixin",
+		"timer.PlayerTimerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	},
+	"client": [
+		"DrawContextMixin",
+		"client.camera.CameraMixin",
+		"client.flash.GuiFlashMixin"
+	]
 }

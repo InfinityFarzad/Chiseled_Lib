@@ -1,7 +1,7 @@
 package net.akws.chiseled_lib.common.interfaces.item;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 public interface CustomAttackItem {
 

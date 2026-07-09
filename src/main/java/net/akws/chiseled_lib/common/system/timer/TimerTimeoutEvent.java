@@ -2,9 +2,8 @@ package net.akws.chiseled_lib.common.system.timer;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.StyleSpriteSource;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.player.Player;
 
 public interface TimerTimeoutEvent {
     Event<TimerTimeoutEvent> EVENT = EventFactory.createArrayBacked(TimerTimeoutEvent.class,
@@ -13,5 +12,5 @@ public interface TimerTimeoutEvent {
             listener.timeout(player,id);
         }
     });
-    void timeout(PlayerEntity player, Identifier identifier);
+    void timeout(Player player, Identifier identifier);
 }

@@ -1,9 +1,10 @@
 package net.akws.chiseled_lib.mixin.client.camera;
 
 import net.akws.chiseled_lib.client.camera.screenshake.Screenshakes;
-import net.minecraft.client.render.Camera;
-import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
+import net.minecraft.client.Camera;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.world.entity.Entity;
+import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,17 +15,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class CameraMixin {
 
     @Shadow
-    protected abstract void setRotation(float yaw, float pitch);
+    protected abstract void move(float surge, float heave, float sway);
 
     @Shadow
-    protected abstract void moveBy(float surge, float heave, float sway);
+    private @Nullable Entity entity;
 
     @Inject(method = "update", at = @At("RETURN"))
-    private void chiseled$screenshake(World area, Entity entity, boolean thirdPerson, boolean inverseView, float tickProgress, CallbackInfo ci) {
-        float yaw = entity.getYaw(tickProgress);
-        float pitch = entity.getPitch(tickProgress);
+    private void chiseled$screenshake(DeltaTracker deltaTracker, CallbackInfo ci) {
 
-        Screenshakes.get().applyScreenshake(entity, yaw, pitch, this::moveBy);
+        if (this.entity != null) {
+            float tickProgress = deltaTracker.getGameTimeDeltaPartialTick(false);
+            float yaw = this.entity.getYRot(tickProgress);
+            float pitch = entity.getXRot(tickProgress);
+
+            Screenshakes.get().applyScreenshake(entity, yaw, pitch, this::move);
+        }
     }
 
 }

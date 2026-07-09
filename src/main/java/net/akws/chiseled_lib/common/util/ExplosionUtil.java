@@ -1,26 +1,26 @@
 package net.akws.chiseled_lib.common.util;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 
 public class ExplosionUtil {
     
-    public static void createSphericalExplosion(World world, BlockPos center, int radius, boolean doBlockDrops) {
+    public static void createSphericalExplosion(Level level, BlockPos center, int radius, boolean doBlockDrops) {
 
         for (int x = -radius; x <= radius; x++) {
             for (int y = -radius; y <= radius; y++) {
                 for (int z = -radius; z <= radius; z++) {
                     if (x * x + y * y + z * z <= radius * radius) {
-                        BlockPos pos = center.add(x, y, z);
-                        if (world.getRandom().nextInt(3) == 0 && !world.isAir(pos.down())) {
-                            world.setBlockState(pos, Blocks.FIRE.getDefaultState());
+                        BlockPos pos = center.offset(x, y, z);
+                        if (level.getRandom().nextInt(3) == 0 && !level.isEmptyBlock(pos.below())) {
+                            level.setBlockAndUpdate(pos, Blocks.FIRE.defaultBlockState());
                         }
-                        if (!world.isAir(pos) && world.getBlockState(pos).getBlock().getBlastResistance() < 8) {
+                        if (!level.isEmptyBlock(pos) && level.getBlockState(pos).getBlock().getExplosionResistance() < 8) {
                             if (!doBlockDrops) {
-                                world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                                level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                             } else {
-                                world.breakBlock(pos, true);
+                                level.destroyBlock(pos, true);
                             }
                         }
                     }
