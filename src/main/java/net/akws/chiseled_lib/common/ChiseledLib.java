@@ -1,5 +1,6 @@
 package net.akws.chiseled_lib.common;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import com.mojang.serialization.Codec;
 import net.akws.chiseled_lib.client.camera.screenflash.ColourFlash;
 import net.akws.chiseled_lib.client.camera.screenflash.Flash;
@@ -16,15 +17,28 @@ import net.akws.chiseled_lib.common.util.TimerUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ActiveTextCollector;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.TextAlignment;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
+import net.minecraft.util.Util;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Items;
+import org.joml.Matrix3x2f;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.util.Map;
 import java.util.Objects;
 
@@ -63,7 +77,7 @@ public class ChiseledLib implements ModInitializer {
         PayloadTypeRegistry.clientboundPlay().register(ExpandedParticlePayload.TYPE, ExpandedParticlePayload.CODEC);
     }
 
-/*    private static void runDebugCode() {
+    private static void runDebugCode() {
         UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
             if (playerEntity.getItemInHand(hand).is(Items.ACACIA_PLANKS)) {
                 TimerUtil.addTimerToPlayer(playerEntity,new Timer(20*4,id("wa")));
@@ -80,5 +94,6 @@ public class ChiseledLib implements ModInitializer {
                 ScreenShakeHelper.createGlobalScreenshake(player.level(),20*2,5.5f);
             }
         });
-    }*/
+
+    }
 }

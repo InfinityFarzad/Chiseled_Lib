@@ -40,7 +40,7 @@ public abstract class PlayerEntityMixin {
                 }
                 attackItem.onFullAttack(player,living,weapon);
             }
-            attackItem.onAttackWithProgress(player,living,weapon);
+            attackItem.onAttackWithProgress(player,living,weapon, attackCooldownProgress);
 
         }
 

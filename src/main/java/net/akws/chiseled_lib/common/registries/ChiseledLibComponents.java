@@ -11,7 +11,7 @@ public class ChiseledLibComponents {
     public static final DataComponentType<ItemHighlightComponent> ITEM_HIGHLIGHT = Registry.register(
             BuiltInRegistries.DATA_COMPONENT_TYPE,
             ChiseledLib.id("item_highlight"),
-            DataComponentType.<ItemHighlightComponent>builder().persistent(ItemHighlightComponent.CODEC).build()
+            DataComponentType.<ItemHighlightComponent>builder().persistent(ItemHighlightComponent.CODEC).ignoreSwapAnimation().build()
     );
 
     public static void init() {}

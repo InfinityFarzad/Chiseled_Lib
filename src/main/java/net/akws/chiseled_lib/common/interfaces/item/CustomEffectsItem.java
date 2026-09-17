@@ -1,5 +1,6 @@
 package net.akws.chiseled_lib.common.interfaces.item;
 
+import net.akws.chiseled_lib.common.item.component.ItemHighlightComponent;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.ItemStack;

@@ -28,7 +28,7 @@ public record EmitterParticlePayload(int entityId, ParticleOptions particleEffec
         @Override
         public void receive(EmitterParticlePayload payload, ClientPlayNetworking.Context context) {
             Minecraft client = Minecraft.getInstance();
-            if (client != null && client.level != null) {
+            if (client.level != null) {
                 Entity entity = client.level.getEntity(payload.entityId);
                 if (entity != null) {
                     client.particleEngine.createTrackingEmitter(entity, payload.particleEffect);

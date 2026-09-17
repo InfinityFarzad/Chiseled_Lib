@@ -9,9 +9,9 @@ public class Timer {
 
     private float timeLeft;
     private boolean removed;
-    private boolean deathImmune;
-    private boolean disconnectImmune;
-    private boolean freazeImmune;
+    private final boolean deathImmune;
+    private final boolean disconnectImmune;
+    private final boolean freazeImmune;
     private Identifier id;
 
     public static final Codec<Timer> CODEC = RecordCodecBuilder.create(i -> i.group(

@@ -9,7 +9,7 @@ public interface CustomAttackItem {
         return true;
     }
 
-    default void onAttackWithProgress(LivingEntity attacker, LivingEntity target, ItemStack stack) {}
+    default void onAttackWithProgress(LivingEntity attacker, LivingEntity target, ItemStack stack, float progress) {}
 
     default void onCritAttack(LivingEntity attacker, LivingEntity target, ItemStack stack) {}
 
