@@ -61,7 +61,7 @@ public abstract class PlayerEntityMixin {
         ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
 
         if (stack.getItem() instanceof CustomAttackItem attackItem) {
-            return attackItem.canDoSweepingAttack(stack, cooldownPassed, criticalHit, knockback);
+            return attackItem.canDoSweepingAttack(player, stack, cooldownPassed, criticalHit, knockback);
         }
 
         return original;

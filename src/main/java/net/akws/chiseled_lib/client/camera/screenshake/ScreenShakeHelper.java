@@ -18,7 +18,7 @@ public class ScreenShakeHelper {
     }
 
     public static void createClientSideScreenshake(Screenshake screenshake) {
-        ScreenshakePayload.send(Minecraft.getInstance().player, screenshake.duration,screenshake.pos, screenshake.radius, screenshake.intensity);
+        Screenshakes.get().create(screenshake.duration,screenshake.pos, screenshake.radius, screenshake.intensity);
     }
 
     public static void createLocalScreenshake(int duration, Vec3 pos, float radius, float intensity, Level level) {

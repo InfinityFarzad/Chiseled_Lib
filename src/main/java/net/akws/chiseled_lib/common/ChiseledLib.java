@@ -7,12 +7,14 @@ import net.akws.chiseled_lib.client.camera.screenflash.Flash;
 import net.akws.chiseled_lib.client.camera.screenflash.Flashes;
 import net.akws.chiseled_lib.client.camera.screenshake.ScreenShakeHelper;
 import net.akws.chiseled_lib.common.interfaces.mixin_interface.TimerInterface;
+import net.akws.chiseled_lib.common.item.component.ItemHighlightComponent;
 import net.akws.chiseled_lib.common.payload.EmitterParticlePayload;
 import net.akws.chiseled_lib.common.payload.ExpandedParticlePayload;
 import net.akws.chiseled_lib.common.payload.ScreenshakePayload;
 import net.akws.chiseled_lib.common.registries.ChiseledLibComponents;
 import net.akws.chiseled_lib.common.system.timer.Timer;
 import net.akws.chiseled_lib.common.system.timer.TimerTimeoutEvent;
+import net.akws.chiseled_lib.common.util.ExplosionUtil;
 import net.akws.chiseled_lib.common.util.TimerUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
@@ -22,6 +24,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -89,11 +92,13 @@ public class ChiseledLib implements ModInitializer {
             if (Objects.equals(identifier, id("wa"))){
                 ScreenShakeHelper.createGlobalScreenshake(player.level(),20*2,1.5f);
                 Flashes.instance().addFlash(new ColourFlash(5,0x55FFFFFF));
+                ExplosionUtil.createSphericalExplosion(player.level(), player.blockPosition(), 15, false);
             }
             if (Objects.equals(identifier, id("da"))){
                 ScreenShakeHelper.createGlobalScreenshake(player.level(),20*2,5.5f);
             }
         });
+        DefaultItemComponentEvents.MODIFY.register((context) -> context.modify(Items.ACACIA_PLANKS, builder -> builder.set(ChiseledLibComponents.ITEM_HIGHLIGHT, new ItemHighlightComponent(0xFFFFFF,true))));
 
     }
 }

@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 
 public interface CustomAttackItem {
 
-    default boolean canDoSweepingAttack(ItemStack stack, boolean cooldownPassed, boolean criticalHit, boolean knockbackAttack) {
+    default boolean canDoSweepingAttack(LivingEntity living,ItemStack stack, boolean cooldownPassed, boolean criticalHit, boolean knockbackAttack) {
         return true;
     }
 
