@@ -18,6 +18,7 @@ import net.akws.chiseled_lib.common.util.ExplosionUtil;
 import net.akws.chiseled_lib.common.util.TimerUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
@@ -32,6 +33,7 @@ import net.minecraft.client.gui.ActiveTextCollector;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.TextAlignment;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Util;
@@ -42,6 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -51,6 +54,11 @@ public class ChiseledLib implements ModInitializer {
 
     public static final AttachmentType<Map<Identifier, Timer>> TIMER_ATTACHMENT = AttachmentRegistry.create(
             id("timer_attachment"),builder -> builder
+                    .syncWith(ByteBufCodecs.map(
+                            HashMap::new,
+                            Identifier.STREAM_CODEC,
+                            Timer.STREAM_CODEC
+                    ), AttachmentSyncPredicate.all())
                     .persistent(Codec.unboundedMap(Identifier.CODEC, Timer.getCodec()))
                     .copyOnDeath()
     );
@@ -83,8 +91,8 @@ public class ChiseledLib implements ModInitializer {
     private static void runDebugCode() {
         UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
             if (playerEntity.getItemInHand(hand).is(Items.ACACIA_PLANKS)) {
-                TimerUtil.addTimerToPlayer(playerEntity,new Timer(20*4,id("wa")));
-                TimerUtil.addTimerToPlayer(playerEntity,new Timer(20*9,id("da")));
+                TimerUtil.addTimerToPlayer(playerEntity,new Timer(id("wa"), 20*4));
+                TimerUtil.addTimerToPlayer(playerEntity,new Timer(id("da"), 20*9));
             }
             return InteractionResult.PASS;
         });

@@ -2,39 +2,54 @@ package net.akws.chiseled_lib.common.system.timer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
+import org.jspecify.annotations.NonNull;
 
 public class Timer {
 
-    private float timeLeft;
+    private int duration;
     private boolean removed;
     private final boolean deathImmune;
     private final boolean disconnectImmune;
-    private final boolean freazeImmune;
-    private Identifier id;
+    private final boolean freezeImmune;
+    private final Identifier id;
 
     public static final Codec<Timer> CODEC = RecordCodecBuilder.create(i -> i.group(
-            Codec.FLOAT.fieldOf("timeLeft").forGetter(Timer::getTimeLeft),
+            Identifier.CODEC.fieldOf("id").forGetter(Timer::getId),
+            Codec.INT.fieldOf("duration").forGetter(Timer::getDuration),
             Codec.BOOL.fieldOf("deathImmune").forGetter(Timer::isImmuneToDeath),
             Codec.BOOL.fieldOf("disconnectImmune").forGetter(Timer::isImmuneToDisconnect),
-            Codec.BOOL.fieldOf("freazeImmune").forGetter(Timer::isFreazeImmune),
-            Identifier.CODEC.fieldOf("id").forGetter(Timer::getId)
+            Codec.BOOL.fieldOf("freezeImmune").forGetter(Timer::isFreezeImmune)
     ).apply(i,Timer::new));
 
-    public Timer(float timeLeft, Identifier id) {
-        this.timeLeft = timeLeft;
-        this.freazeImmune = false;
+    public static final StreamCodec<RegistryFriendlyByteBuf, Timer> STREAM_CODEC = new StreamCodec<>() {
+        @Override
+        public @NonNull Timer decode(RegistryFriendlyByteBuf input) {
+            return input.readLenientJsonWithCodec(CODEC);
+        }
+
+        @Override
+        public void encode(RegistryFriendlyByteBuf output, @NonNull Timer value) {
+            output.writeJsonWithCodec(CODEC, value);
+        }
+    };
+
+    public Timer(Identifier id, int duration) {
+        this.duration = duration;
+        this.freezeImmune = false;
         this.removed = false;
         this.deathImmune = false;
         this.disconnectImmune = true;
         this.id = id;
     }
 
-    public Timer(float timeLeft, boolean deathImmune, boolean disconnectImmune, boolean freazeImmune, Identifier id) {
-        this.timeLeft = timeLeft;
+    public Timer(Identifier id, int duration, boolean deathImmune, boolean disconnectImmune, boolean freezeImmune) {
+        this.duration = duration;
         this.removed = false;
-        this.freazeImmune = freazeImmune;
+        this.freezeImmune = freezeImmune;
         this.deathImmune = deathImmune;
         this.disconnectImmune = disconnectImmune;
         this.id = id;
@@ -43,8 +58,8 @@ public class Timer {
     /* - methods related to events - */
 
     public void tick(Player player) {
-        if (!(timeLeft-- <= 0) && !isRemoved()) {
-            timeLeft--;
+        if (!(duration-- <= 0) && !isRemoved()) {
+            duration--;
         } else {
             this.onTimeout(player);
         }
@@ -57,8 +72,8 @@ public class Timer {
 
     /* - conditions - */
 
-    public boolean isFreazeImmune() {
-        return freazeImmune;
+    public boolean isFreezeImmune() {
+        return freezeImmune;
     }
 
     public boolean isImmuneToDeath() {
@@ -75,7 +90,7 @@ public class Timer {
     }
 
     public boolean isFinished() {
-        return !isRemoved() && ((getTimeLeft() - 1.0f) <= 0.0f);
+        return !isRemoved() && ((getDuration() - 1.0f) <= 0.0f);
     }
 
     /* - getter and setter - */
@@ -84,8 +99,8 @@ public class Timer {
         this.removed = true;
     }
 
-    public float getTimeLeft() {
-        return timeLeft;
+    public int getDuration() {
+        return duration;
     }
 
     public Identifier getId() {

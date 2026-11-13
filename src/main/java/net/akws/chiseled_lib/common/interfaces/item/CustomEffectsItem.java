@@ -3,15 +3,17 @@ package net.akws.chiseled_lib.common.interfaces.item;
 import net.akws.chiseled_lib.common.item.component.ItemHighlightComponent;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public interface CustomEffectsItem {
 
-    default boolean hasCustomParticleLogic(ParticleType particleType, ItemStack stack) {
+    default boolean hasCustomParticleLogic(ParticleType particleType, ItemStack stack, Player player, Level level) {
         return false;
     }
 
-    default void useCustomParticleLogic(ParticleType particleType, ItemStack stack) {}
+    default void useCustomParticleLogic(ParticleType particleType, ItemStack stack, Player player, Level level) {}
 
     default net.minecraft.sounds.SoundEvent critSound(ItemStack stack) {
         return null;

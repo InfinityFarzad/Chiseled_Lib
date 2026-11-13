@@ -21,16 +21,16 @@ public abstract class PlayerTimerMixin implements TimerInterface {
     @Unique
     private HashMap<Identifier, Timer> storedTimers = new HashMap<>();
 
+    @Override
     public void chiseledLib$addTimer(Timer timer) {
-        if (storedTimers.containsKey(timer.getId())) {
-            storedTimers.remove(timer.getId());
-        }
+        storedTimers.remove(timer.getId());
         storedTimers.put(timer.getId(),timer);
     }
 
-/*    public Timer chiseledLib$getTimer(Identifier identifier) {
-        return storedTimers.get(identifier) != null ? storedTimers.get(identifier) : new Timer(0.0f, identifier);
-    }*/
+    @Override
+    public Timer chiseledLib$getTimer(Identifier identifier) {
+        return storedTimers.get(identifier) != null ? storedTimers.get(identifier) : new Timer(identifier, 0);
+    }
 
     public void chiseledLib$clearTimersOnDisconnect() {
         for (Timer timer : storedTimers.values()) {
@@ -49,36 +49,34 @@ public abstract class PlayerTimerMixin implements TimerInterface {
     @Override
     public void chiseledLib$initTimerHash() {
         Player player = (Player) (Object) this;
-        this.storedTimers = new HashMap<Identifier, Timer>(player.getAttachedOrElse(ChiseledLib.TIMER_ATTACHMENT, new HashMap<Identifier, Timer>()));
+        this.storedTimers = new HashMap<>(player.getAttachedOrElse(ChiseledLib.TIMER_ATTACHMENT, new HashMap<>()));
     }
 
-    @Unique
+    @Override
     public boolean chiseledLib$containsTimer(Identifier identifier) {
         return storedTimers.containsKey(identifier);
     }
 
-    /* -* {  what am i doing again  } *- */
-
     @Inject(method = "tick",at =@At("HEAD"))
     private void chiseledLib$tickTimers(CallbackInfo ci) {
         Player player = (Player) (Object) this;
-        List<Identifier> removetimers = new ArrayList<>();
+        List<Identifier> removedTimers = new ArrayList<>();
         for (Identifier id : storedTimers.keySet()) {
             Timer timer = storedTimers.get(id);
             if (timer.isRemoved()) {
-                removetimers.add(id);
+                removedTimers.add(id);
 
             } else {
                 timer.tick(player);
             }
         }
-        removetimers.forEach((id) ->
+        removedTimers.forEach((id) ->
             storedTimers.remove(id)
         );
     }
 
     @Inject(method = "die",at =@At("HEAD"))
-    private void chiseledLib$clearTimersOnDeath(DamageSource damageSource, CallbackInfo ci) {
+    private void chiseledLib$clearTimersOnDeath(DamageSource source, CallbackInfo ci) {
         for (Timer timer : storedTimers.values()) {
             if (timer.isImmuneToDeath()) {
                 timer.remove();

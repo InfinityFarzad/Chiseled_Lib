@@ -28,14 +28,15 @@ public abstract class PlayerEntityMixin {
     @Shadow
     protected abstract boolean canCriticalAttack(Entity entity);
 
-    @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getAttackStrengthScale(F)F",shift = At.Shift.BEFORE))
-    private void chiseled_lib$triggerCustomAttacks(Entity target, CallbackInfo ci) {
+    @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getAttackStrengthScale(F)F", shift = At.Shift.BEFORE))
+    private void chiseled_lib$triggerCustomAttacks(Entity entity, CallbackInfo ci) {
         Player player = (Player) (Object)this;
         ItemStack weapon = player.getWeaponItem();
         float attackCooldownProgress = player.getAttackStrengthScale(0.5f);
-        if (weapon.getItem() instanceof CustomAttackItem attackItem && target instanceof LivingEntity living) {
+
+        if (weapon.getItem() instanceof CustomAttackItem attackItem && entity instanceof LivingEntity living) {
             if (attackCooldownProgress > 0.9) {
-                if (canCriticalAttack(target)) {
+                if (canCriticalAttack(entity)) {
                     attackItem.onCritAttack(player,living,weapon);
                 }
                 attackItem.onFullAttack(player,living,weapon);
@@ -47,41 +48,41 @@ public abstract class PlayerEntityMixin {
     }
 
     @Inject(method = "doSweepAttack", at = @At("TAIL"))
-    private void chiseled_lib$onSweepAttack(Entity target, float damage, DamageSource damageSource, float cooldownProgress, CallbackInfo ci) {
+    private void chiseled_lib$onSweepAttack(Entity entity, float baseDamage, DamageSource damageSource, float attackStrengthScale, CallbackInfo ci) {
         Player player = (Player) (Object)this;
         ItemStack weaponStack = player.getWeaponItem();
-        if (weaponStack != null && weaponStack.getItem() instanceof CustomAttackItem attackItem && target instanceof LivingEntity living) {
+        if (weaponStack != null && weaponStack.getItem() instanceof CustomAttackItem attackItem && entity instanceof LivingEntity living) {
             attackItem.onSweepAttack(player,living,player.getWeaponItem());
         }
     }
 
     @ModifyReturnValue(method = "isSweepAttack", at = @At("RETURN"))
-    private boolean chiseled_lib$sweepingItem(boolean original, boolean cooldownPassed, boolean criticalHit, boolean knockback) {
+    private boolean chiseled_lib$sweepingItem(boolean original, boolean fullStrengthAttack, boolean criticalAttack, boolean knockbackAttack) {
         Player player = (Player) (Object) this;
         ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
 
         if (stack.getItem() instanceof CustomAttackItem attackItem) {
-            return attackItem.canDoSweepingAttack(player, stack, cooldownPassed, criticalHit, knockback);
+            return attackItem.canDoSweepingAttack(player, stack, fullStrengthAttack, criticalAttack, knockbackAttack);
         }
 
         return original;
     }
 
     @WrapOperation(method = "doSweepAttack", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;sendParticles(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I"))
-    private int chiseled_lib$sweepParticle(ServerLevel serverWorld, ParticleOptions particleEffect, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double speed, Operation<Integer> original) {
+    private int chiseled_lib$sweepParticle(ServerLevel serverWorld, ParticleOptions particle, double x, double y, double z, int count, double xDist, double yDist, double zDist, double speed, Operation<Integer> original) {
         Player player = (Player) (Object) this;
         ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
 
         if (stack.getItem() instanceof CustomEffectsItem effectsItem) {
-            if (effectsItem.hasCustomParticleLogic(CustomEffectsItem.ParticleType.SWEEP, stack)) {
-                effectsItem.useCustomParticleLogic(CustomEffectsItem.ParticleType.SWEEP, stack);
+            if (effectsItem.hasCustomParticleLogic(CustomEffectsItem.ParticleType.SWEEP, stack, player, player.level())) {
+                effectsItem.useCustomParticleLogic(CustomEffectsItem.ParticleType.SWEEP, stack, player, player.level());
                 return 0;
             } else if (effectsItem.sweepParticles(stack) != null) {
-                particleEffect = effectsItem.sweepParticles(stack);
+                particle = effectsItem.sweepParticles(stack);
             }
         }
 
-        return original.call(serverWorld, particleEffect, x, y, z, count, offsetX, offsetY, offsetZ, speed);
+        return original.call(serverWorld, particle, x, y, z, count, xDist, yDist, zDist, speed);
     }
 
     @ModifyArg(method = "doSweepAttack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;playServerSideSound(Lnet/minecraft/sounds/SoundEvent;)V"))
@@ -124,11 +125,11 @@ public abstract class PlayerEntityMixin {
     }
 
     @WrapOperation(method = "attackVisualEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;playServerSideSound(Lnet/minecraft/sounds/SoundEvent;)V", ordinal = 1))
-    private void chiseled_lib$weakNStrongSound(Player player, SoundEvent sound, Operation<Void> original, Entity target, boolean criticalHit, boolean sweeping, boolean cooldownPassed) {
+    private void chiseled_lib$weakNStrongSound(Player player, SoundEvent sound, Operation<Void> original, Entity entity, boolean criticalAttack, boolean sweepAttack, boolean fullStrengthAttack) {
         ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
 
         if (stack.getItem() instanceof CustomEffectsItem effectsItem) {
-            if (cooldownPassed) {
+            if (fullStrengthAttack) {
                 if (effectsItem.strongSound(stack) != null) {
                     original.call(player, effectsItem.strongSound(stack));
                     return;
