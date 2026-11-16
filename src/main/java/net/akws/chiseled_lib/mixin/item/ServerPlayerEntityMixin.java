@@ -12,11 +12,16 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ServerPlayer.class)
-public class ServerPlayerEntityMixin {
+public abstract class ServerPlayerEntityMixin {
+
+    @Shadow
+    public abstract Level level();
 
     @WrapOperation(method = "crit", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerChunkCache;sendToTrackingPlayersAndSelf(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/network/protocol/Packet;)V"))
     private void chiseled_lib$critParticles(ServerChunkCache instance, Entity entity, Packet<? super ClientGamePacketListener> packet, Operation<Void> original, Entity target) {
@@ -24,8 +29,8 @@ public class ServerPlayerEntityMixin {
             ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
 
             if (stack.getItem() instanceof CustomEffectsItem effectsItem) {
-                if (effectsItem.hasCustomParticleLogic(CustomEffectsItem.ParticleType.CRIT, stack)) {
-                    effectsItem.useCustomParticleLogic(CustomEffectsItem.ParticleType.CRIT, stack);
+                if (effectsItem.hasCustomParticleLogic(CustomEffectsItem.ParticleType.CRIT, stack, player, level())) {
+                    effectsItem.useCustomParticleLogic(CustomEffectsItem.ParticleType.CRIT, stack, player, level());
                     return;
                 } else if (effectsItem.critParticles(stack) != null) {
                     ServerPlayNetworking.send(player, new EmitterParticlePayload(target.getId(), effectsItem.critParticles(stack)));
@@ -43,8 +48,8 @@ public class ServerPlayerEntityMixin {
             ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
 
             if (stack.getItem() instanceof CustomEffectsItem effectsItem) {
-                if (effectsItem.hasCustomParticleLogic(CustomEffectsItem.ParticleType.ENCHANTED_CRIT, stack)) {
-                    effectsItem.useCustomParticleLogic(CustomEffectsItem.ParticleType.ENCHANTED_CRIT, stack);
+                if (effectsItem.hasCustomParticleLogic(CustomEffectsItem.ParticleType.ENCHANTED_CRIT, stack, player, level())) {
+                    effectsItem.useCustomParticleLogic(CustomEffectsItem.ParticleType.ENCHANTED_CRIT, stack, player, level());
                     return;
                 } else if (effectsItem.enchantedCritParticles(stack) != null) {
                     ServerPlayNetworking.send(player, new EmitterParticlePayload(target.getId(), effectsItem.enchantedCritParticles(stack)));
